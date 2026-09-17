@@ -12,15 +12,15 @@
 
 /* ---- CATEGORIES ---- */
 const CATEGORIES = [
-  { id:"makan",     name:"Makan & Minum",   icon:"ti-soup",         color:"#3525CD", bg:"#E2DFFF" },
-  { id:"kos",       name:"Kos & Laundry",   icon:"ti-bed",          color:"#006C49", bg:"#E1F0E9" },
-  { id:"transport", name:"Transportasi",    icon:"ti-scooter",      color:"#0C447C", bg:"#E6F1FB" },
-  { id:"nongkrong", name:"Nongkrong",       icon:"ti-coffee",       color:"#993C1D", bg:"#FAECE7" },
-  { id:"pulsa",     name:"Pulsa & Internet",icon:"ti-wifi",         color:"#654FA0", bg:"#F0ECF9" },
-  { id:"belanja",   name:"Belanja",         icon:"ti-shopping-bag", color:"#E65100", bg:"#FFF3E0" },
-  { id:"kuliah",    name:"Kuliah & Tugas",  icon:"ti-school",       color:"#2E7D32", bg:"#E8F5E9" },
-  { id:"kesehatan", name:"Kesehatan",       icon:"ti-first-aid-kit",color:"#993556", bg:"#FBEAF0" },
-  { id:"lainnya",   name:"Lainnya",         icon:"ti-dots",         color:"#5F5E5A", bg:"#F1EFE8" },
+  { id: "makan", name: "Makan & Minum", icon: "ti-soup", color: "#3525CD", bg: "#E2DFFF" },
+  { id: "kos", name: "Kos & Laundry", icon: "ti-bed", color: "#006C49", bg: "#E1F0E9" },
+  { id: "transport", name: "Transportasi", icon: "ti-scooter", color: "#0C447C", bg: "#E6F1FB" },
+  { id: "nongkrong", name: "Nongkrong", icon: "ti-coffee", color: "#993C1D", bg: "#FAECE7" },
+  { id: "pulsa", name: "Pulsa & Internet", icon: "ti-wifi", color: "#654FA0", bg: "#F0ECF9" },
+  { id: "belanja", name: "Belanja", icon: "ti-shopping-bag", color: "#E65100", bg: "#FFF3E0" },
+  { id: "kuliah", name: "Kuliah & Tugas", icon: "ti-school", color: "#2E7D32", bg: "#E8F5E9" },
+  { id: "kesehatan", name: "Kesehatan", icon: "ti-first-aid-kit", color: "#993556", bg: "#FBEAF0" },
+  { id: "lainnya", name: "Lainnya", icon: "ti-dots", color: "#5F5E5A", bg: "#F1EFE8" },
 ];
 
 function getCat(id) {
@@ -29,11 +29,11 @@ function getCat(id) {
 
 /* ---- TAGS ---- */
 const TAGS = [
-  { id:"pribadi",    label:"Pribadi",    emoji:"\u{1F464}" },
-  { id:"organisasi", label:"Organisasi", emoji:"\u{1F3E2}" },
-  { id:"panitia",    label:"Panitia",    emoji:"\u{1F3AA}" },
-  { id:"kuliah",     label:"Kuliah",     emoji:"\u{1F4DA}" },
-  { id:"lainnya",    label:"Lainnya",    emoji:"\u{00B7}" },
+  { id: "pribadi", label: "Pribadi", emoji: "\u{1F464}" },
+  { id: "organisasi", label: "Organisasi", emoji: "\u{1F3E2}" },
+  { id: "panitia", label: "Panitia", emoji: "\u{1F3AA}" },
+  { id: "kuliah", label: "Kuliah", emoji: "\u{1F4DA}" },
+  { id: "lainnya", label: "Lainnya", emoji: "\u{00B7}" },
 ];
 
 function getTag(id) {
@@ -48,10 +48,10 @@ function tagPillHTML(tagId) {
 
 /* ---- ACCOUNTS ---- */
 const ACCOUNTS = [
-  { id:"gopay", name:"GoPay" },
-  { id:"bca",   name:"BCA Mobile" },
-  { id:"cash",  name:"Tunai" },
-  { id:"dana",  name:"DANA" },
+  { id: "gopay", name: "GoPay" },
+  { id: "bca", name: "BCA Mobile" },
+  { id: "cash", name: "Tunai" },
+  { id: "dana", name: "DANA" },
 ];
 
 /* ---- DATE HELPERS ---- */
@@ -64,7 +64,7 @@ function daysAgo(n) {
 }
 
 function fmtDate(d) {
-  const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
@@ -73,54 +73,73 @@ function newTxId() { return "tx" + ++txIdCounter; }
 
 /* ---- STATE ---- */
 const state = {
-  monthlyBudgetTotal: 1500000+800000+600000+500000+200000+400000+300000+150000,
+  monthlyBudgetTotal: 1500000 + 800000 + 600000 + 500000 + 200000 + 400000 + 300000 + 150000,
   categoryBudgets: {
-    makan:1500000, kos:800000, transport:600000, nongkrong:500000,
-    pulsa:200000, belanja:400000, kuliah:300000, kesehatan:150000, lainnya:200000,
+    makan: 1500000, kos: 800000, transport: 600000, nongkrong: 500000,
+    pulsa: 200000, belanja: 400000, kuliah: 300000, kesehatan: 150000, lainnya: 200000,
   },
   startingBalance: 4250000,
   transactions: [
-    { id:newTxId(), date:daysAgo(0),  desc:"Indomie Geprek Kak Rina",  cat:"makan",     account:"gopay", amount:-18000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(0),  desc:"Bayar Kos Bulanan",         cat:"kos",       account:"bca",   amount:-650000,  type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(1),  desc:"Gojek ke Kampus",           cat:"transport", account:"gopay", amount:-15000,   type:"expense", tag:"kuliah" },
-    { id:newTxId(), date:daysAgo(1),  desc:"Kopi Kenangan",             cat:"nongkrong", account:"gopay", amount:-25000,   type:"expense", tag:"organisasi" },
-    { id:newTxId(), date:daysAgo(2),  desc:"Paket Data Telkomsel",      cat:"pulsa",     account:"dana",  amount:-65000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(2),  desc:"Laundry Kiloan",            cat:"kos",       account:"cash",  amount:-20000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(3),  desc:"Print Tugas + Jilid",       cat:"kuliah",    account:"cash",  amount:-12000,   type:"expense", tag:"kuliah" },
-    { id:newTxId(), date:daysAgo(3),  desc:"Nasi Padang Sederhana",     cat:"makan",     account:"cash",  amount:-22000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(4),  desc:"Nongkrong di Angkringan",   cat:"nongkrong", account:"cash",  amount:-45000,   type:"expense", tag:"panitia" },
-    { id:newTxId(), date:daysAgo(4),  desc:"Beli Skincare",             cat:"belanja",   account:"bca",   amount:-89000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(5),  desc:"Uang Saku Bulanan",         cat:"lainnya",   account:"bca",   amount:2500000,  type:"income",  tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(5),  desc:"Beli Beras 5kg",            cat:"makan",     account:"cash",  amount:-65000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(6),  desc:"Grab ke Mall",              cat:"transport", account:"gopay", amount:-22000,   type:"expense", tag:"organisasi" },
-    { id:newTxId(), date:daysAgo(6),  desc:"Vitamin & Obat Flu",        cat:"kesehatan", account:"cash",  amount:-35000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(7),  desc:"Ayam Geprek Bensu",         cat:"makan",     account:"gopay", amount:-28000,   type:"expense", tag:"pribadi" },
-    { id:newTxId(), date:daysAgo(8),  desc:"Iuran UKM Fotografi",       cat:"kuliah",    account:"gopay", amount:-100000,  type:"expense", tag:"organisasi" },
-    { id:newTxId(), date:daysAgo(9),  desc:"Konsumsi Rapat Panitia",    cat:"makan",     account:"cash",  amount:-150000,  type:"expense", tag:"panitia" },
-    { id:newTxId(), date:daysAgo(10), desc:"Beli Kertas A4 + Tinta",    cat:"kuliah",    account:"bca",   amount:-55000,   type:"expense", tag:"kuliah" },
+    { id: newTxId(), date: daysAgo(0), desc: "Indomie Geprek Kak Rina", cat: "makan", account: "gopay", amount: -18000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(0), desc: "Bayar Kos Bulanan", cat: "kos", account: "bca", amount: -650000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(1), desc: "Gojek ke Kampus", cat: "transport", account: "gopay", amount: -15000, type: "expense", tag: "kuliah" },
+    { id: newTxId(), date: daysAgo(1), desc: "Kopi Kenangan", cat: "nongkrong", account: "gopay", amount: -25000, type: "expense", tag: "organisasi" },
+    { id: newTxId(), date: daysAgo(2), desc: "Paket Data Telkomsel", cat: "pulsa", account: "dana", amount: -65000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(2), desc: "Laundry Kiloan", cat: "kos", account: "cash", amount: -20000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(3), desc: "Print Tugas + Jilid", cat: "kuliah", account: "cash", amount: -12000, type: "expense", tag: "kuliah" },
+    { id: newTxId(), date: daysAgo(3), desc: "Nasi Padang Sederhana", cat: "makan", account: "cash", amount: -22000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(4), desc: "Nongkrong di Angkringan", cat: "nongkrong", account: "cash", amount: -45000, type: "expense", tag: "panitia" },
+    { id: newTxId(), date: daysAgo(4), desc: "Beli Skincare", cat: "belanja", account: "bca", amount: -89000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(5), desc: "Uang Saku Bulanan", cat: "lainnya", account: "bca", amount: 2500000, type: "income", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(5), desc: "Beli Beras 5kg", cat: "makan", account: "cash", amount: -65000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(6), desc: "Grab ke Mall", cat: "transport", account: "gopay", amount: -22000, type: "expense", tag: "organisasi" },
+    { id: newTxId(), date: daysAgo(6), desc: "Vitamin & Obat Flu", cat: "kesehatan", account: "cash", amount: -35000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(7), desc: "Ayam Geprek Bensu", cat: "makan", account: "gopay", amount: -28000, type: "expense", tag: "pribadi" },
+    { id: newTxId(), date: daysAgo(8), desc: "Iuran UKM Fotografi", cat: "kuliah", account: "gopay", amount: -100000, type: "expense", tag: "organisasi" },
+    { id: newTxId(), date: daysAgo(9), desc: "Konsumsi Rapat Panitia", cat: "makan", account: "cash", amount: -150000, type: "expense", tag: "panitia" },
+    { id: newTxId(), date: daysAgo(10), desc: "Beli Kertas A4 + Tinta", cat: "kuliah", account: "bca", amount: -55000, type: "expense", tag: "kuliah" },
   ],
 };
 
 /* ---- DERIVED HELPERS ---- */
 function getCurrentBalance() {
-  return state.startingBalance + state.transactions.reduce((s,t) => s + t.amount, 0);
+  return state.startingBalance + state.transactions.reduce((s, t) => s + t.amount, 0);
 }
 
 function getSpentByCategory() {
   const map = {};
   CATEGORIES.forEach(c => (map[c.id] = 0));
   state.transactions.forEach(t => {
-    if (t.type === "expense") map[t.cat] = (map[t.cat]||0) + Math.abs(t.amount);
+    if (t.type === "expense") map[t.cat] = (map[t.cat] || 0) + Math.abs(t.amount);
   });
   return map;
 }
 
 function getTotalSpent() {
-  return state.transactions.filter(t => t.type==="expense").reduce((s,t) => s+Math.abs(t.amount), 0);
+  return state.transactions.filter(t => t.type === "expense").reduce((s, t) => s + Math.abs(t.amount), 0);
+}
+
+function isCurrentMonth(date) {
+  return date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
+}
+
+function getCurrentMonthSpentByCategory() {
+  const map = {};
+  CATEGORIES.forEach(c => (map[c.id] = 0));
+  state.transactions.forEach(t => {
+    if (t.type === "expense" && isCurrentMonth(t.date)) {
+      map[t.cat] = (map[t.cat] || 0) + Math.abs(t.amount);
+    }
+  });
+  return map;
+}
+
+function getCurrentMonthTotalSpent() {
+  return Object.values(getCurrentMonthSpentByCategory()).reduce((sum, amount) => sum + amount, 0);
 }
 
 function getTotalIncome() {
-  return state.transactions.filter(t => t.type==="income").reduce((s,t) => s+t.amount, 0);
+  return state.transactions.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0);
 }
 
 function rupiah(n) {
@@ -130,8 +149,8 @@ function rupiah(n) {
 
 function rupiahShort(n) {
   const abs = Math.abs(n);
-  if (abs >= 1000000) return (n<0?"-":"") + "Rp " + (abs/1000000).toFixed(abs%1000000===0?0:1) + "jt";
-  if (abs >= 1000)    return (n<0?"-":"") + "Rp " + (abs/1000).toFixed(0) + "rb";
+  if (abs >= 1000000) return (n < 0 ? "-" : "") + "Rp " + (abs / 1000000).toFixed(abs % 1000000 === 0 ? 0 : 1) + "jt";
+  if (abs >= 1000) return (n < 0 ? "-" : "") + "Rp " + (abs / 1000).toFixed(0) + "rb";
   return rupiah(n);
 }
 
@@ -205,8 +224,8 @@ function autoOpenNavGroup(page) {
 ============================================================ */
 document.getElementById("btn-login").addEventListener("click", () => {
   const email = document.getElementById("login-email").value.trim();
-  const pass  = document.getElementById("login-password").value.trim();
-  const err   = document.getElementById("login-error");
+  const pass = document.getElementById("login-password").value.trim();
+  const err = document.getElementById("login-error");
   if (!email || !pass) {
     err.textContent = "Mohon isi email dan kata sandi.";
     err.style.display = "block";
@@ -218,7 +237,7 @@ document.getElementById("btn-login").addEventListener("click", () => {
   initApp();
 });
 
-["login-email","login-password"].forEach(id => {
+["login-email", "login-password"].forEach(id => {
   document.getElementById(id).addEventListener("keydown", e => {
     if (e.key === "Enter") document.getElementById("btn-login").click();
   });
@@ -255,13 +274,13 @@ function initApp() {
 /* ============================================================
    NAVIGATION
 ============================================================ */
-const allPages = ["dashboard","transactions","budgets","insight","savings","accounts","reports","upgrade"];
+const allPages = ["dashboard", "transactions", "budgets", "insight", "savings", "accounts", "reports", "upgrade"];
 
 function showPage(page) {
   if (!allPages.includes(page)) return;
   currentPage = page;
   allPages.forEach(p => {
-    const el = document.getElementById("page-"+p);
+    const el = document.getElementById("page-" + p);
     if (el) el.classList.toggle("hidden", p !== page);
   });
   document.querySelectorAll(".nav-item[data-page]").forEach(btn => {
@@ -272,15 +291,15 @@ function showPage(page) {
   });
   autoOpenNavGroup(page);
 
-  if (page === "dashboard")    renderDashboard();
+  if (page === "dashboard") renderDashboard();
   if (page === "transactions") renderTransactions();
-  if (page === "budgets")      renderBudgets();
-  if (page === "insight")      renderInsight();
-  if (page === "savings")      renderSavings();
-  if (page === "accounts")   { renderAccounts(); startAutoSync(); }
-  if (page === "reports")      renderReports();
-  if (page === "upgrade")      renderUpgrade();
-  if (page !== "accounts")     stopAutoSync();
+  if (page === "budgets") renderBudgets();
+  if (page === "insight") renderInsight();
+  if (page === "savings") renderSavings();
+  if (page === "accounts") { renderAccounts(); startAutoSync(); }
+  if (page === "reports") renderReports();
+  if (page === "upgrade") renderUpgrade();
+  if (page !== "accounts") stopAutoSync();
 
   window.scrollTo(0, 0);
 }
@@ -341,17 +360,19 @@ globalSearch.addEventListener("keydown", e => {
 let trendChartInstance = null;
 
 function renderDashboard() {
-  const balance   = getCurrentBalance();
+  const balance = getCurrentBalance();
   const totalSpent = getTotalSpent();
+  const monthSpent = getCurrentMonthTotalSpent();
   const remaining = Math.max(state.monthlyBudgetTotal - totalSpent, 0);
-  const pctUsed   = Math.min(Math.round((totalSpent / state.monthlyBudgetTotal) * 100), 100);
+  const pctUsed = Math.min(Math.round((totalSpent / state.monthlyBudgetTotal) * 100), 100);
 
-  document.getElementById("stat-balance").textContent   = rupiah(balance);
+  document.getElementById("stat-balance").textContent = rupiah(balance);
   document.getElementById("stat-remaining").textContent = rupiah(remaining);
+  document.getElementById("stat-monthly-spent").textContent = rupiah(monthSpent);
 
   const bar = document.getElementById("stat-remaining-bar");
   bar.style.width = pctUsed + "%";
-  bar.className   = "progress-fill" + (pctUsed>=100?" danger":pctUsed>=80?" warn":"");
+  bar.className = "progress-fill" + (pctUsed >= 100 ? " danger" : pctUsed >= 80 ? " warn" : "");
   document.getElementById("stat-remaining-pct").textContent = pctUsed + "% terpakai";
 
   const note = document.getElementById("stat-balance-note");
@@ -363,29 +384,42 @@ function renderDashboard() {
     note.parentElement.style.color = "var(--success)";
   }
 
-  let health, label;
-  if      (pctUsed < 60)  { health=88; label="Sangat Baik"; }
-  else if (pctUsed < 80)  { health=72; label="Baik"; }
-  else if (pctUsed < 100) { health=55; label="Perlu Perhatian"; }
-  else                    { health=35; label="Waspada"; }
-  document.getElementById("stat-health").textContent      = health;
-  document.getElementById("stat-health-label").textContent = label;
-  const hc = health>=80?"var(--success)":health>=60?"#E65100":"var(--danger)";
-  document.getElementById("stat-health").style.color      = hc;
-  document.getElementById("stat-health-label").style.color = hc;
+  renderFinancialInsight(monthSpent);
 
   renderCategoryBreakdown();
   renderRecentTransactions();
   renderTrendChart();
 }
 
+function renderFinancialInsight(monthSpent) {
+  const spentByCategory = getCurrentMonthSpentByCategory();
+  const largest = CATEGORIES
+    .map(category => ({ ...category, amount: spentByCategory[category.id] || 0 }))
+    .sort((a, b) => b.amount - a.amount)[0];
+  const name = document.getElementById("financial-insight-name");
+  const detail = document.getElementById("financial-insight-detail");
+  const percentage = document.getElementById("financial-insight-percent");
+
+  if (!largest || largest.amount === 0 || monthSpent === 0) {
+    name.textContent = "Belum ada pengeluaran bulan ini.";
+    detail.textContent = "Tambahkan transaksi untuk melihat kategori terbesar.";
+    percentage.textContent = "0%";
+    return;
+  }
+
+  const share = Math.round((largest.amount / monthSpent) * 100);
+  name.textContent = `${largest.name} menjadi pengeluaran terbesar bulan ini.`;
+  detail.textContent = `${rupiah(largest.amount)} dari total ${rupiah(monthSpent)} pengeluaran.`;
+  percentage.textContent = `${share}%`;
+}
+
 function renderCategoryBreakdown() {
-  const spent  = getSpentByCategory();
-  const total  = Object.values(spent).reduce((a,b)=>a+b,0) || 1;
+  const spent = getSpentByCategory();
+  const total = Object.values(spent).reduce((a, b) => a + b, 0) || 1;
   const sorted = CATEGORIES
-    .map(c => ({...c, amount: spent[c.id]||0}))
+    .map(c => ({ ...c, amount: spent[c.id] || 0 }))
     .filter(c => c.amount > 0)
-    .sort((a,b) => b.amount-a.amount)
+    .sort((a, b) => b.amount - a.amount)
     .slice(0, 6);
 
   const list = document.getElementById("dash-cat-list");
@@ -395,7 +429,7 @@ function renderCategoryBreakdown() {
     return;
   }
   sorted.forEach(c => {
-    const pct = Math.round((c.amount/total)*100);
+    const pct = Math.round((c.amount / total) * 100);
     const row = document.createElement("div");
     row.className = "cat-row";
     row.innerHTML = `
@@ -412,16 +446,16 @@ function renderCategoryBreakdown() {
 }
 
 function renderRecentTransactions() {
-  const list   = document.getElementById("dash-recent-list");
+  const list = document.getElementById("dash-recent-list");
   list.innerHTML = "";
-  const recent = [...state.transactions].sort((a,b)=>b.date-a.date).slice(0,5);
+  const recent = [...state.transactions].sort((a, b) => b.date - a.date).slice(0, 5);
   if (!recent.length) {
     list.innerHTML = '<div class="empty-state"><i class="ti ti-receipt-off"></i>Belum ada transaksi.</div>';
     return;
   }
   recent.forEach(t => {
-    const c   = getCat(t.cat);
-    const acc = ACCOUNTS.find(a => a.id===t.account);
+    const c = getCat(t.cat);
+    const acc = ACCOUNTS.find(a => a.id === t.account);
     const row = document.createElement("div");
     row.className = "tx-row";
     row.innerHTML = `
@@ -430,12 +464,12 @@ function renderRecentTransactions() {
         <div>
           <div class="tx-name">${t.desc}</div>
           <div class="tx-meta">
-            ${fmtDate(t.date)} · ${acc?acc.name:t.account}
+            ${fmtDate(t.date)} · ${acc ? acc.name : t.account}
             ${t.tag ? tagPillHTML(t.tag) : ""}
           </div>
         </div>
       </div>
-      <div class="tx-amt ${t.type}">${t.type==="income"?"+":""}${rupiah(t.amount)}</div>`;
+      <div class="tx-amt ${t.type}">${t.type === "income" ? "+" : ""}${rupiah(t.amount)}</div>`;
     list.appendChild(row);
   });
 }
@@ -443,8 +477,8 @@ function renderRecentTransactions() {
 function getChartColors() {
   const dark = document.documentElement.getAttribute("data-theme") === "dark";
   return {
-    grid:  dark ? "rgba(255,255,255,0.06)" : "#EAE6F4",
-    tick:  dark ? "#ABA9C4" : "#464555",
+    grid: dark ? "rgba(255,255,255,0.06)" : "#EAE6F4",
+    tick: dark ? "#ABA9C4" : "#464555",
   };
 }
 
@@ -452,14 +486,14 @@ function renderTrendChart() {
   const ctx = document.getElementById("trendChart");
   if (!ctx) return;
   const labels = [], data = [];
-  for (let i=6; i>=0; i--) {
+  for (let i = 6; i >= 0; i--) {
     const d = daysAgo(i);
-    labels.push(["Min","Sen","Sel","Rab","Kam","Jum","Sab"][d.getDay()]);
+    labels.push(["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"][d.getDay()]);
     data.push(state.transactions
-      .filter(t => t.type==="expense" && t.date.toDateString()===d.toDateString())
-      .reduce((s,t) => s+Math.abs(t.amount), 0));
+      .filter(t => t.type === "expense" && t.date.toDateString() === d.toDateString())
+      .reduce((s, t) => s + Math.abs(t.amount), 0));
   }
-  const {grid, tick} = getChartColors();
+  const { grid, tick } = getChartColors();
   if (trendChartInstance) trendChartInstance.destroy();
   trendChartInstance = new Chart(ctx, {
     type: "line",
@@ -475,10 +509,10 @@ function renderTrendChart() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend:{display:false}, tooltip:{callbacks:{label:ctx=>rupiah(ctx.parsed.y)}} },
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => rupiah(ctx.parsed.y) } } },
       scales: {
-        y: { ticks:{callback:v=>rupiahShort(v),font:{size:10},color:tick}, grid:{color:grid} },
-        x: { grid:{display:false}, ticks:{font:{size:11},color:tick} },
+        y: { ticks: { callback: v => rupiahShort(v), font: { size: 10 }, color: tick }, grid: { color: grid } },
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: tick } },
       },
     },
   });
@@ -503,14 +537,14 @@ function populateFilterDropdowns() {
 }
 
 function getFilteredTransactions() {
-  const cat    = document.getElementById("filter-category").value;
-  const acc    = document.getElementById("filter-account").value;
-  const type   = document.getElementById("filter-type").value;
-  const tag    = document.getElementById("filter-tag").value;
+  const cat = document.getElementById("filter-category").value;
+  const acc = document.getElementById("filter-account").value;
+  const type = document.getElementById("filter-type").value;
+  const tag = document.getElementById("filter-tag").value;
   const search = globalSearch.value.trim().toLowerCase();
 
   return [...state.transactions]
-    .sort((a,b) => b.date-a.date)
+    .sort((a, b) => b.date - a.date)
     .filter(t => {
       if (cat !== "all" && t.cat !== cat) return false;
       if (acc !== "all" && t.account !== acc) return false;
@@ -525,7 +559,7 @@ function renderTransactions() {
   const tbody = document.getElementById("tx-table-body");
   const mobileList = document.getElementById("tx-mobile-list");
   const empty = document.getElementById("tx-empty");
-  const rows  = getFilteredTransactions();
+  const rows = getFilteredTransactions();
   tbody.innerHTML = "";
   if (mobileList) mobileList.innerHTML = "";
 
@@ -536,18 +570,18 @@ function renderTransactions() {
   }
 
   rows.forEach(t => {
-    const c   = getCat(t.cat);
-    const acc = ACCOUNTS.find(a => a.id===t.account);
+    const c = getCat(t.cat);
+    const acc = ACCOUNTS.find(a => a.id === t.account);
 
     // Desktop table row
-    const tr  = document.createElement("tr");
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td style="color:var(--text-muted);white-space:nowrap;">${fmtDate(t.date)}</td>
       <td><div class="tx-desc"><span style="width:7px;height:7px;border-radius:9999px;background:${c.color};display:inline-block;flex-shrink:0;"></span>${t.desc}</div></td>
       <td><span class="chip">${c.name}</span></td>
       <td>${t.tag ? tagPillHTML(t.tag) : '<span style="color:var(--text-faint);font-size:12px;">—</span>'}</td>
-      <td style="color:var(--text-muted);">${acc?acc.name:t.account}</td>
-      <td class="right amt-cell ${t.type}">${t.type==="income"?"+":""}${rupiah(t.amount)}</td>
+      <td style="color:var(--text-muted);">${acc ? acc.name : t.account}</td>
+      <td class="right amt-cell ${t.type}">${t.type === "income" ? "+" : ""}${rupiah(t.amount)}</td>
       <td>
         <div class="tx-actions">
           <button class="tx-action-btn" data-edit="${t.id}" title="Edit" aria-label="Edit transaksi"><i class="ti ti-pencil"></i></button>
@@ -565,7 +599,7 @@ function renderTransactions() {
         <div class="tx-mobile-body">
           <div class="tx-mobile-top">
             <div class="tx-mobile-name">${t.desc}</div>
-            <div class="tx-mobile-amount ${t.type}">${t.type==="income"?"+":""}${rupiah(t.amount)}</div>
+            <div class="tx-mobile-amount ${t.type}">${t.type === "income" ? "+" : ""}${rupiah(t.amount)}</div>
           </div>
           <div class="tx-mobile-meta">
             <span class="tx-mobile-date">${fmtDate(t.date)}</span>
@@ -582,12 +616,12 @@ function renderTransactions() {
   });
 }
 
-["filter-category","filter-account","filter-type","filter-tag"].forEach(id => {
+["filter-category", "filter-account", "filter-type", "filter-tag"].forEach(id => {
   document.getElementById(id).addEventListener("change", renderTransactions);
 });
 
 document.getElementById("btn-clear-filters").addEventListener("click", () => {
-  ["filter-category","filter-account","filter-type","filter-tag"].forEach(id => {
+  ["filter-category", "filter-account", "filter-type", "filter-tag"].forEach(id => {
     document.getElementById(id).value = "all";
   });
   globalSearch.value = "";
@@ -694,7 +728,7 @@ document.getElementById("btn-export").addEventListener("click", () => {
     return;
   }
 
-  const headers = ["Tanggal","Deskripsi","Kategori","Tag","Akun","Tipe","Jumlah"];
+  const headers = ["Tanggal", "Deskripsi", "Kategori", "Tag", "Akun", "Tipe", "Jumlah"];
   const csvRows = [headers.join(",")];
 
   rows.forEach(t => {
@@ -716,7 +750,7 @@ document.getElementById("btn-export").addEventListener("click", () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "studentfin-transaksi-" + new Date().toISOString().slice(0,10) + ".csv";
+  a.download = "studentfin-transaksi-" + new Date().toISOString().slice(0, 10) + ".csv";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -729,32 +763,32 @@ document.getElementById("btn-export").addEventListener("click", () => {
    BUDGETS — with inline edit
 ============================================================ */
 function renderBudgets() {
-  const spent     = getSpentByCategory();
+  const spent = getSpentByCategory();
   const totalSpent = getTotalSpent();
-  state.monthlyBudgetTotal = Object.values(state.categoryBudgets).reduce((a,b)=>a+b,0);
+  state.monthlyBudgetTotal = Object.values(state.categoryBudgets).reduce((a, b) => a + b, 0);
   const totalAlloc = state.monthlyBudgetTotal;
-  const pct       = Math.min(Math.round((totalSpent/totalAlloc)*100), 999);
+  const pct = Math.min(Math.round((totalSpent / totalAlloc) * 100), 999);
 
   document.getElementById("budget-total-alloc").textContent = rupiah(totalAlloc);
   document.getElementById("budget-total-spent").textContent = rupiah(totalSpent);
   const bar = document.getElementById("budget-total-bar");
-  bar.style.width = Math.min(pct,100) + "%";
-  bar.className   = "progress-fill" + (pct>=100?" danger":pct>=80?" warn":"");
+  bar.style.width = Math.min(pct, 100) + "%";
+  bar.className = "progress-fill" + (pct >= 100 ? " danger" : pct >= 80 ? " warn" : "");
   document.getElementById("budget-total-pct").textContent = pct + "% terpakai";
 
   const grid = document.getElementById("budget-cards");
   grid.innerHTML = "";
 
   Object.keys(state.categoryBudgets).forEach(catId => {
-    const c       = getCat(catId);
-    const budget  = state.categoryBudgets[catId];
-    const used    = spent[catId] || 0;
-    const usedPct = Math.round((used/budget)*100);
-    const isOver  = used > budget;
+    const c = getCat(catId);
+    const budget = state.categoryBudgets[catId];
+    const used = spent[catId] || 0;
+    const usedPct = Math.round((used / budget) * 100);
+    const isOver = used > budget;
     const remaining = budget - used;
 
     const card = document.createElement("div");
-    card.className = "budget-card" + (isOver?" over":"");
+    card.className = "budget-card" + (isOver ? " over" : "");
     card.innerHTML = `
       <div class="budget-top">
         <div class="budget-icon-name">
@@ -762,22 +796,22 @@ function renderBudgets() {
           <div style="font-weight:600;font-family:'Geist',sans-serif;font-size:13.5px;">${c.name}</div>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
-          ${isOver?'<div class="budget-overspent-tag"><i class="ti ti-alert-triangle"></i>Lebih</div>':""}
+          ${isOver ? '<div class="budget-overspent-tag"><i class="ti ti-alert-triangle"></i>Lebih</div>' : ""}
           <button class="budget-edit-btn" data-budget-edit="${catId}" aria-label="Edit anggaran ${c.name}"><i class="ti ti-pencil"></i></button>
         </div>
       </div>
       <div class="budget-figures">
         <div>
           <div class="budget-spent-label">Terpakai</div>
-          <div class="budget-spent-amt ${isOver?"over":""}">${rupiah(used)}</div>
+          <div class="budget-spent-amt ${isOver ? "over" : ""}">${rupiah(used)}</div>
         </div>
         <div>
           <div class="budget-of" id="budget-of-${catId}">dari ${rupiah(budget)}</div>
-          <div class="budget-left ${isOver?"over":""}">${isOver?rupiah(remaining)+" lebih":rupiah(remaining)+" sisa"}</div>
+          <div class="budget-left ${isOver ? "over" : ""}">${isOver ? rupiah(remaining) + " lebih" : rupiah(remaining) + " sisa"}</div>
         </div>
       </div>
       <div class="progress-track">
-        <div class="progress-fill ${isOver?"danger":usedPct>=80?"warn":""}" style="width:${Math.min(usedPct,100)}%;"></div>
+        <div class="progress-fill ${isOver ? "danger" : usedPct >= 80 ? "warn" : ""}" style="width:${Math.min(usedPct, 100)}%;"></div>
       </div>
       <div class="budget-edit-row" id="budget-edit-${catId}" style="display:none;">
         <input class="budget-edit-input" type="text" inputmode="numeric" placeholder="Jumlah anggaran baru" value="${budget}" data-cat="${catId}"/>
@@ -866,18 +900,18 @@ document.getElementById("add-budget-save").addEventListener("click", () => {
    QUICK ADD MODAL — with edit mode support
 ============================================================ */
 let selectedQACategory = null;
-let selectedQATag      = null;
-let qaRawAmount        = "";
+let selectedQATag = null;
+let qaRawAmount = "";
 
 function buildQuickAddCategoryGrid() {
   const grid = document.getElementById("qa-cat-grid");
   grid.innerHTML = "";
   CATEGORIES.forEach(c => {
     const btn = document.createElement("button");
-    btn.className   = "cat-btn";
+    btn.className = "cat-btn";
     btn.dataset.cat = c.id;
-    btn.type        = "button";
-    btn.innerHTML   = `<i class="ti ${c.icon}" style="color:${c.color};"></i><span>${c.name.split(" ")[0]}</span>`;
+    btn.type = "button";
+    btn.innerHTML = `<i class="ti ${c.icon}" style="color:${c.color};"></i><span>${c.name.split(" ")[0]}</span>`;
     btn.addEventListener("click", () => {
       selectedQACategory = c.id;
       document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("selected"));
@@ -895,9 +929,9 @@ document.querySelectorAll(".tag-option").forEach(btn => {
   });
 });
 
-const qaAmountInput  = document.getElementById("qa-amount");
-const amountDisplay  = document.getElementById("amount-display");
-const amountCursor   = document.getElementById("amount-cursor");
+const qaAmountInput = document.getElementById("qa-amount");
+const amountDisplay = document.getElementById("amount-display");
+const amountCursor = document.getElementById("amount-cursor");
 
 qaAmountInput.addEventListener("input", e => {
   qaRawAmount = e.target.value.replace(/[^\d]/g, "");
@@ -922,7 +956,7 @@ function openQuickAdd() {
   document.getElementById("modal-overlay").classList.add("show");
   qaRawAmount = "";
   selectedQACategory = null;
-  selectedQATag      = null;
+  selectedQATag = null;
   qaAmountInput.value = "";
   document.getElementById("qa-desc").value = "";
   document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("selected"));
@@ -964,7 +998,7 @@ document.addEventListener("keydown", e => {
 
 document.getElementById("qa-submit").addEventListener("click", () => {
   const amount = Number(qaRawAmount);
-  const desc   = document.getElementById("qa-desc").value.trim();
+  const desc = document.getElementById("qa-desc").value.trim();
 
   if (!amount || amount <= 0) {
     showToast("Masukkan jumlah yang valid", "ti-alert-circle");
@@ -974,7 +1008,7 @@ document.getElementById("qa-submit").addEventListener("click", () => {
     showToast("Pilih kategori terlebih dahulu", "ti-alert-circle"); return;
   }
 
-  const cat      = getCat(selectedQACategory);
+  const cat = getCat(selectedQACategory);
   const finalDesc = desc || cat.name;
 
   if (editingTxId) {
@@ -988,14 +1022,14 @@ document.getElementById("qa-submit").addEventListener("click", () => {
     }
   } else {
     state.transactions.push({
-      id:      newTxId(),
-      date:    new Date(),
-      desc:    finalDesc,
-      cat:     selectedQACategory,
+      id: newTxId(),
+      date: new Date(),
+      desc: finalDesc,
+      cat: selectedQACategory,
       account: "gopay",
-      amount:  -amount,
-      type:    "expense",
-      tag:     selectedQATag || "pribadi",
+      amount: -amount,
+      type: "expense",
+      tag: selectedQATag || "pribadi",
     });
     showToast(`Tersimpan: ${finalDesc} · ${rupiah(amount)}`, "ti-circle-check");
   }
@@ -1014,13 +1048,13 @@ document.getElementById("qa-submit").addEventListener("click", () => {
    AUTO-REFRESH — sync all visible pages when data changes
 ============================================================ */
 function refreshAllPages() {
-  if (currentPage === "dashboard")    renderDashboard();
+  if (currentPage === "dashboard") renderDashboard();
   if (currentPage === "transactions") renderTransactions();
-  if (currentPage === "budgets")      renderBudgets();
-  if (currentPage === "insight")      renderInsight();
-  if (currentPage === "savings")      renderSavings();
-  if (currentPage === "accounts")     renderAccounts();
-  if (currentPage === "reports")      renderReports();
+  if (currentPage === "budgets") renderBudgets();
+  if (currentPage === "insight") renderInsight();
+  if (currentPage === "savings") renderSavings();
+  if (currentPage === "accounts") renderAccounts();
+  if (currentPage === "reports") renderReports();
   checkBudgetAlerts();
 }
 
@@ -1028,7 +1062,7 @@ function refreshAllPages() {
    TOAST
 ============================================================ */
 let toastTimeout = null;
-function showToast(text, icon="ti-circle-check") {
+function showToast(text, icon = "ti-circle-check") {
   const toast = document.getElementById("toast");
   document.getElementById("toast-text").textContent = text;
   toast.querySelector("i").className = "ti " + icon;
@@ -1041,28 +1075,25 @@ function showToast(text, icon="ti-circle-check") {
    STATIC DATA — other pages
 ============================================================ */
 const ACCOUNTS_DATA = [
-  { id:"bca",     name:"Bank Central Asia (BCA)", type:"Rekening •••• 4589", letter:"BCA", bg:"#003d79", balance:8500000,  sync:"Sync 2j lalu",      syncOk:true  },
-  { id:"mandiri", name:"Bank Mandiri",             type:"Tabungan •••• 1204", letter:"MDR", bg:"#003366", balance:3500000,  sync:"Sync 5j lalu",      syncOk:true  },
-  { id:"gopay",   name:"GoPay",                   type:"E-Wallet",           letter:"GP",  bg:"#00880e", balance:2800000,  sync:"Sync gagal",        syncOk:false },
-  { id:"ovo",     name:"OVO",                     type:"E-Wallet",           letter:"OVO", bg:"#4c3494", balance:1800000,  sync:"Sync 1h lalu",      syncOk:true  },
-  { id:"cash",    name:"Dompet Tunai",             type:"Akun Manual",        letter:"IDR", bg:"#5F5E5A", balance:1850000,  sync:"Diperbarui manual", syncOk:true  },
+  { id: "bca", name: "Bank Central Asia (BCA)", type: "Rekening •••• 4589", letter: "BCA", bg: "#003d79", balance: 8500000, sync: "Simulasi · 2j lalu", syncOk: true },
+  { id: "mandiri", name: "Bank Mandiri", type: "Tabungan •••• 1204", letter: "MDR", bg: "#003366", balance: 3500000, sync: "Simulasi · 5j lalu", syncOk: true },
+  { id: "gopay", name: "GoPay", type: "E-Wallet", letter: "GP", bg: "#00880e", balance: 2800000, sync: "Simulasi gagal", syncOk: false },
+  { id: "ovo", name: "OVO", type: "E-Wallet", letter: "OVO", bg: "#4c3494", balance: 1800000, sync: "Simulasi · 1j lalu", syncOk: true },
+  { id: "cash", name: "Dompet Tunai", type: "Akun Manual", letter: "IDR", bg: "#5F5E5A", balance: 1850000, sync: "Manual · tersimpan", syncOk: true },
 ];
 
 const SAVINGS_GOALS = [
-  { id:"laptop",    name:"Upgrade Laptop",    icon:"ti-device-laptop", color:"#3525CD", bg:"rgba(79,70,229,0.15)",  saved:12500000, target:18000000, status:"on-track", statusText:"Sesuai jadwal — target Januari" },
-  { id:"emergency", name:"Dana Darurat",      icon:"ti-shield-check",  color:"#006C49", bg:"rgba(108,248,187,0.2)", saved:4200000,  target:10000000, status:"on-track", statusText:"Proyeksi selesai: Maret 2025" },
-  { id:"trip",      name:"Liburan Semarang",  icon:"ti-map-pin",       color:"#684000", bg:"rgba(136,85,0,0.15)",   saved:850000,   target:3500000,  status:"behind",   statusText:"Sedikit di belakang jadwal" },
+  { id: "laptop", name: "Upgrade Laptop", icon: "ti-device-laptop", color: "#3525CD", bg: "rgba(79,70,229,0.15)", saved: 12500000, target: 18000000, status: "on-track", statusText: "Sesuai jadwal — target Januari" },
+  { id: "emergency", name: "Dana Darurat", icon: "ti-shield-check", color: "#006C49", bg: "rgba(108,248,187,0.2)", saved: 4200000, target: 10000000, status: "on-track", statusText: "" },
+  { id: "trip", name: "Liburan Semarang", icon: "ti-map-pin", color: "#684000", bg: "rgba(136,85,0,0.15)", saved: 850000, target: 3500000, status: "behind", statusText: "Sedikit di belakang jadwal" },
 ];
 
-const AI_INSIGHTS = [
-  { title:"Pengeluaran Makan Tinggi",  body:"Pengeluaranmu untuk makan naik 15% bulan ini. Pertimbangkan masak sendiri untuk hemat Rp 400rb/bulan.", accent:"var(--danger)" },
-  { title:"Hemat Transportasi",        body:"Mantap memanfaatkan shuttle kampus! Biaya transportasi turun Rp 150rb dibanding bulan lalu.",           accent:"var(--success)" },
-];
+const SAVINGS_MONTHLY_PACE = 2500000;
 
 const PREV_REPORTS = [
-  { month:"Mei 2025",   spent:3850000, net:1400000,  positive:true  },
-  { month:"April 2025", spent:4500000, net:-250000,  positive:false },
-  { month:"Maret 2025", spent:3200000, net:1900000,  positive:true  },
+  { month: "Mei 2025", spent: 3850000, net: 1400000, positive: true },
+  { month: "April 2025", spent: 4500000, net: -250000, positive: false },
+  { month: "Maret 2025", spent: 3200000, net: 1900000, positive: true },
 ];
 
 /* ============================================================
@@ -1071,34 +1102,86 @@ const PREV_REPORTS = [
 let incExpChartInst = null, donutChartInst = null;
 
 function renderInsight() {
+  renderInsightSummary();
   renderIncomeExpenseChart();
   renderDonutChart();
   renderHeatmap();
 }
 
+function getInsightAnalysis() {
+  const expenses = state.transactions.filter(t => t.type === "expense");
+  const totalSpent = expenses.reduce((sum, t) => sum + Math.abs(t.amount), 0);
+  const totalIncome = getTotalIncome();
+  const spentByCategory = getSpentByCategory();
+  const largestCategory = CATEGORIES
+    .map(category => ({ ...category, amount: spentByCategory[category.id] || 0 }))
+    .sort((a, b) => b.amount - a.amount)[0];
+  const weekendSpent = expenses
+    .filter(t => [0, 6].includes(t.date.getDay()))
+    .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+  const weekdaySpent = totalSpent - weekendSpent;
+  const savingRate = totalIncome > 0 ? Math.round(((totalIncome - totalSpent) / totalIncome) * 100) : 0;
+  const categoryShare = totalSpent > 0 ? Math.round((largestCategory.amount / totalSpent) * 100) : 0;
+  const weekendShare = totalSpent > 0 ? Math.round((weekendSpent / totalSpent) * 100) : 0;
+
+  return { totalSpent, totalIncome, largestCategory, categoryShare, weekendSpent, weekdaySpent, weekendShare, savingRate };
+}
+
+function renderInsightSummary() {
+  const analysis = getInsightAnalysis();
+  const category = analysis.largestCategory;
+  const observation = document.getElementById("insight-observation");
+  const why = document.getElementById("insight-why");
+  const action = document.getElementById("insight-action");
+  const weekendBadge = document.getElementById("insight-weekend-badge");
+  const savingBadge = document.getElementById("insight-saving-badge");
+  const smartAction = document.getElementById("smart-action-text");
+
+  if (!category || category.amount === 0) {
+    observation.textContent = "Belum ada pengeluaran untuk dianalisis.";
+    why.textContent = "Tambahkan transaksi agar pola pengeluaranmu dapat terlihat.";
+    action.textContent = "Catat transaksi pertama untuk mendapatkan rekomendasi yang relevan.";
+    smartAction.textContent = action.textContent;
+    return;
+  }
+
+  observation.textContent = `${category.name} menjadi kategori pengeluaran terbesar dengan ${rupiah(category.amount)} (${analysis.categoryShare}% dari total pengeluaran).`;
+  why.textContent = `Kategori ini menyumbang porsi terbesar dari ${rupiah(analysis.totalSpent)} pengeluaran yang tercatat.`;
+  action.textContent = `Tetapkan batas pengeluaran ${category.name.toLowerCase()} sebelum menambah transaksi berikutnya.`;
+  weekendBadge.innerHTML = `<i class="ti ti-calendar-week" style="font-size:12px;"></i>${analysis.weekendShare}% dari total pengeluaran terjadi di akhir pekan`;
+  savingBadge.innerHTML = `<i class="ti ti-leaf" style="font-size:12px;"></i>${analysis.savingRate}% Tingkat Tabungan`;
+  smartAction.textContent = action.textContent;
+}
+
 function renderIncomeExpenseChart() {
   const ctx = document.getElementById("incomeExpenseChart");
   if (!ctx) return;
-  const months   = ["Jan","Feb","Mar","Apr","Mei","Jun"];
-  const incomes  = [2500000,2500000,3000000,2500000,2500000,2500000];
-  const expenses = [1800000,2100000,2400000,1950000,2200000,getTotalSpent()];
-  const {grid, tick} = getChartColors();
+  const dates = Array.from({ length: 7 }, (_, index) => daysAgo(6 - index));
+  const months = dates.map(fmtDate);
+  const incomes = dates.map(date => state.transactions
+    .filter(t => t.type === "income" && t.date.toDateString() === date.toDateString())
+    .reduce((sum, t) => sum + t.amount, 0));
+  const expenses = dates.map(date => state.transactions
+    .filter(t => t.type === "expense" && t.date.toDateString() === date.toDateString())
+    .reduce((sum, t) => sum + Math.abs(t.amount), 0));
+  const { grid, tick } = getChartColors();
   if (incExpChartInst) incExpChartInst.destroy();
   incExpChartInst = new Chart(ctx, {
     type: "line",
     data: {
       labels: months,
       datasets: [
-        { label:"Pemasukan",   data:incomes,  borderColor:"#4ADE80", backgroundColor:"rgba(74,222,128,0.1)", borderWidth:2.5, fill:true, tension:0.35, pointRadius:3 },
-        { label:"Pengeluaran", data:expenses, borderColor:"#7B6EFF", backgroundColor:"rgba(123,110,255,0.1)", borderWidth:2.5, fill:true, tension:0.35, pointRadius:3 },
+        { label: "Pemasukan", data: incomes, yAxisID: "income", borderColor: "#4ADE80", backgroundColor: "rgba(74,222,128,0.1)", borderWidth: 2.5, fill: true, tension: 0.35, pointRadius: 3 },
+        { label: "Pengeluaran", data: expenses, yAxisID: "expense", borderColor: "#7B6EFF", backgroundColor: "rgba(123,110,255,0.1)", borderWidth: 2.5, fill: true, tension: 0.35, pointRadius: 3 },
       ],
     },
     options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+": "+rupiah(c.parsed.y)}}},
-      scales:{
-        y:{ticks:{callback:v=>rupiahShort(v),font:{size:10},color:tick},grid:{color:grid}},
-        x:{grid:{display:false},ticks:{font:{size:11},color:tick}},
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.dataset.label + ": " + rupiah(c.parsed.y) } } },
+      scales: {
+        income: { position: "left", title: { display: true, text: "Pemasukan", color: "#4ADE80", font: { size: 10, weight: "600" } }, ticks: { callback: v => rupiah(v), font: { size: 9 }, color: tick }, grid: { color: grid } },
+        expense: { position: "right", title: { display: true, text: "Pengeluaran", color: "#7B6EFF", font: { size: 10, weight: "600" } }, ticks: { callback: v => rupiah(v), font: { size: 9 }, color: tick }, grid: { drawOnChartArea: false } },
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: tick } },
       },
     },
   });
@@ -1108,25 +1191,32 @@ function renderDonutChart() {
   const ctx = document.getElementById("donutChart");
   if (!ctx) return;
   const spent = getSpentByCategory();
-  const data  = CATEGORIES.filter(c => spent[c.id]>0).map(c => ({name:c.name, val:spent[c.id], color:c.color}));
-  const total = data.reduce((s,d) => s+d.val, 0);
-  document.getElementById("donut-center").textContent = rupiahShort(total);
+  const categories = CATEGORIES.filter(c => spent[c.id] > 0);
+  const visible = categories.slice(0, 4).map(c => ({ name: c.name, val: spent[c.id], color: c.color }));
+  const remaining = categories.slice(4).reduce((sum, c) => sum + spent[c.id], 0);
+  const data = remaining > 0
+    ? [...visible, { name: "Lainnya", val: remaining, color: "#5F5E5A" }]
+    : visible;
+  const total = data.reduce((s, d) => s + d.val, 0);
+  document.getElementById("donut-center").textContent = rupiah(total);
   if (donutChartInst) donutChartInst.destroy();
   donutChartInst = new Chart(ctx, {
     type: "doughnut",
     data: {
-      labels: data.map(d=>d.name),
-      datasets: [{data:data.map(d=>d.val), backgroundColor:data.map(d=>d.color), borderWidth:0, hoverOffset:4}],
+      labels: data.map(d => d.name),
+      datasets: [{ data: data.map(d => d.val), backgroundColor: data.map(d => d.color), borderWidth: 0, hoverOffset: 4 }],
     },
     options: {
-      responsive:true, maintainAspectRatio:false, cutout:"65%",
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.label+": "+rupiah(c.parsed)}}},
+      responsive: true, maintainAspectRatio: false, cutout: "65%",
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ": " + rupiah(c.parsed) } } },
     },
   });
   const legend = document.getElementById("donut-legend");
   legend.innerHTML = "";
-  data.slice(0,4).forEach(d => {
-    const pct = Math.round((d.val/total)*100);
+  let displayedPct = 0;
+  data.forEach((d, index) => {
+    const pct = index === data.length - 1 ? 100 - displayedPct : Math.round((d.val / total) * 100);
+    displayedPct += pct;
     const row = document.createElement("div");
     row.style.cssText = "display:flex;align-items:center;gap:7px;font-size:12px;";
     row.innerHTML = `<div style="width:9px;height:9px;border-radius:9999px;background:${d.color};flex-shrink:0;"></div><div style="flex:1;color:var(--text);font-family:'Geist',sans-serif;font-weight:700;">${d.name}</div><div style="color:var(--text-muted);">${pct}%</div>`;
@@ -1137,12 +1227,10 @@ function renderDonutChart() {
 function renderHeatmap() {
   const grid = document.getElementById("heatmap-grid");
   if (!grid) return;
-  const times = ["Pagi (6-12)","Siang (12-14)","Sore (14-18)","Malam (18-21)","Larut (21-00)","Dini (00-6)"];
-  const days  = ["Sen","Sel","Rab","Kam","Jum","Sab","Min"];
-  const data  = [
-    [1,3,1,2,0,0],[2,2,1,1,0,0],[1,3,2,2,0,0],
-    [1,2,1,3,1,0],[2,3,2,4,3,1],[1,4,3,4,4,2],[1,3,3,3,2,1],
-  ];
+  const days = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
+  const dayIndexes = [1, 2, 3, 4, 5, 6, 0];
+  const data = dayIndexes.map(day => state.transactions.filter(t => t.date.getDay() === day).length);
+  const maxCount = Math.max(...data, 1);
   grid.innerHTML = "";
   grid.appendChild(document.createElement("div"));
   days.forEach(d => {
@@ -1150,15 +1238,15 @@ function renderHeatmap() {
     h.className = "heatmap-col-header"; h.textContent = d;
     grid.appendChild(h);
   });
-  times.forEach((t,ti) => {
-    const lbl = document.createElement("div");
-    lbl.className = "heatmap-label"; lbl.textContent = t;
-    grid.appendChild(lbl);
-    days.forEach((_,di) => {
-      const cell = document.createElement("div");
-      cell.className = "hm-cell hm-" + data[di][ti];
-      grid.appendChild(cell);
-    });
+  const label = document.createElement("div");
+  label.className = "heatmap-label";
+  label.textContent = "Transaksi";
+  grid.appendChild(label);
+  data.forEach(count => {
+    const cell = document.createElement("div");
+    cell.className = "hm-cell hm-" + Math.min(Math.ceil((count / maxCount) * 4), 4);
+    cell.title = `${count} transaksi`;
+    grid.appendChild(cell);
   });
 }
 
@@ -1167,17 +1255,36 @@ function renderHeatmap() {
 ============================================================ */
 let forecastChartInst = null;
 
+function getSavingsForecastDate(goal, monthlyPace = SAVINGS_MONTHLY_PACE) {
+  const remaining = Math.max(goal.target - goal.saved, 0);
+  const months = monthlyPace > 0 ? Math.ceil(remaining / monthlyPace) : 0;
+  const forecastDate = new Date();
+  forecastDate.setDate(1);
+  forecastDate.setMonth(forecastDate.getMonth() + months);
+  return forecastDate;
+}
+
+function formatSavingsMonth(date) {
+  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+  return `${months[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+function getSavingsGoalStatusText(goal) {
+  if (goal.status === "behind") return goal.statusText;
+  return `Proyeksi selesai: ${formatSavingsMonth(getSavingsForecastDate(goal))}`;
+}
+
 function renderSavings() {
   const list = document.getElementById("goals-list");
   list.innerHTML = "";
   let totalLocked = 0;
   SAVINGS_GOALS.forEach(g => {
     totalLocked += g.saved;
-    const pct           = Math.round((g.saved/g.target)*100);
-    const progressColor = g.status==="on-track" ? (pct>=50?"var(--success)":"var(--primary)") : "var(--danger)";
-    const statusIcon    = g.status==="on-track" ? "ti-trending-up" : "ti-alert-triangle";
-    const statusColor   = g.status==="on-track" ? "var(--success)" : "var(--danger)";
-    const pctColor      = g.status==="on-track" ? (pct>=50?"var(--success)":"var(--primary)") : "var(--danger)";
+    const pct = Math.round((g.saved / g.target) * 100);
+    const progressColor = g.status === "on-track" ? (pct >= 50 ? "var(--success)" : "var(--primary)") : "var(--danger)";
+    const statusIcon = g.status === "on-track" ? "ti-trending-up" : "ti-alert-triangle";
+    const statusColor = g.status === "on-track" ? "var(--success)" : "var(--danger)";
+    const pctColor = g.status === "on-track" ? (pct >= 50 ? "var(--success)" : "var(--primary)") : "var(--danger)";
 
     const card = document.createElement("div");
     card.className = "goal-card";
@@ -1188,7 +1295,7 @@ function renderSavings() {
           <div class="goal-icon" style="background:${g.bg};color:${g.color};"><i class="ti ${g.icon}"></i></div>
           <div>
             <div class="goal-name">${g.name}</div>
-            <div class="goal-status" style="color:${statusColor};"><i class="ti ${statusIcon}" style="font-size:11px;"></i>${g.statusText}</div>
+            <div class="goal-status" style="color:${statusColor};"><i class="ti ${statusIcon}" style="font-size:11px;"></i>${getSavingsGoalStatusText(g)}</div>
           </div>
         </div>
         <button style="color:var(--text-faint);font-size:17px;" aria-label="Opsi target" onclick="showToast('Edit target belum tersedia','ti-info-circle')"><i class="ti ti-dots-vertical"></i></button>
@@ -1196,13 +1303,12 @@ function renderSavings() {
       <div>
         <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:7px;">
           <div>
-            <span style="font-size:15px;font-weight:700;color:var(--text-muted);">Rp</span>
-            <span style="font-size:24px;font-weight:700;">${(g.saved/1000000).toFixed(1).replace(".",",")}jt</span>
+            <span style="font-size:24px;font-weight:700;">${rupiah(g.saved)}</span>
           </div>
           <div style="font-size:13px;color:var(--text-muted);">dari ${rupiah(g.target)}</div>
         </div>
         <div class="goal-progress-bar"><div class="goal-progress-fill" style="width:${pct}%;background:${progressColor};"></div></div>
-        <div class="goal-pct-row"><span style="color:${pctColor};">${pct}% Selesai</span><span style="color:var(--text-muted);">${rupiahShort(g.target-g.saved)} tersisa</span></div>
+        <div class="goal-pct-row"><span style="color:${pctColor};">${pct}% Selesai</span><span style="color:var(--text-muted);">${rupiah(g.target - g.saved)} tersisa</span></div>
       </div>`;
     list.appendChild(card);
   });
@@ -1213,26 +1319,38 @@ function renderSavings() {
 function renderForecastChart() {
   const ctx = document.getElementById("forecastChart");
   if (!ctx) return;
-  const {grid, tick} = getChartColors();
-  const months    = ["Sep","Okt","Nov","Des","Jan"];
-  const actual    = [10000000,12000000,13500000,null,null];
-  const projected = [null,null,13500000,16000000,18000000];
+  const { grid, tick } = getChartColors();
+  const goal = SAVINGS_GOALS.find(g => g.id === "laptop") || SAVINGS_GOALS[0];
+  const monthsToTarget = Math.max(Math.ceil(Math.max(goal.target - goal.saved, 0) / SAVINGS_MONTHLY_PACE), 0);
+  const chartMonths = Math.max(monthsToTarget, 1);
+  const chartDates = Array.from({ length: chartMonths + 1 }, (_, index) => {
+    const date = new Date();
+    date.setDate(1);
+    date.setMonth(date.getMonth() + index);
+    return date;
+  });
+  const months = chartDates.map(formatSavingsMonth);
+  const actual = [goal.saved, ...Array(chartMonths).fill(null)];
+  const projected = chartDates.map((_, index) => Math.min(goal.saved + index * SAVINGS_MONTHLY_PACE, goal.target));
+  const forecastDate = getSavingsForecastDate(goal);
+  document.getElementById("forecast-pace").textContent = rupiah(SAVINGS_MONTHLY_PACE) + "/bulan";
+  document.getElementById("forecast-date").textContent = formatSavingsMonth(forecastDate);
   if (forecastChartInst) forecastChartInst.destroy();
   forecastChartInst = new Chart(ctx, {
     type: "line",
     data: {
       labels: months,
       datasets: [
-        { label:"Aktual",   data:actual,    borderColor:"var(--success)", borderWidth:2.5, pointRadius:[3,3,4,0,0], tension:0.3, spanGaps:false },
-        { label:"Proyeksi", data:projected, borderColor:"var(--text-faint)", borderWidth:2, borderDash:[5,4], pointRadius:[0,0,4,3,3], tension:0.3, spanGaps:false },
+        { label: "Aktual", data: actual, borderColor: "#7B6EFF", backgroundColor: "rgba(123,110,255,0.08)", borderWidth: 2.5, pointRadius: [4, ...Array(chartMonths).fill(0)], pointBackgroundColor: "#7B6EFF", tension: 0.3, spanGaps: false },
+        { label: "Proyeksi", data: projected, borderColor: "#4ADE80", backgroundColor: "rgba(74,222,128,0.08)", borderWidth: 2.5, borderDash: [6, 4], pointRadius: 4, pointBackgroundColor: "#4ADE80", tension: 0.3, spanGaps: false },
       ],
     },
     options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+": "+rupiah(c.parsed.y)}}},
-      scales:{
-        y:{ticks:{callback:v=>rupiahShort(v),font:{size:10},color:tick},grid:{color:grid}},
-        x:{grid:{display:false},ticks:{font:{size:11},color:tick}},
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.dataset.label + ": " + rupiah(c.parsed.y) } } },
+      scales: {
+        y: { ticks: { callback: v => rupiah(v), font: { size: 10 }, color: tick }, grid: { color: grid } },
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: tick } },
       },
     },
   });
@@ -1246,7 +1364,7 @@ document.getElementById("btn-add-goal").addEventListener("click", () => {
    ACCOUNTS — with auto-sync
 ============================================================ */
 function renderAccounts() {
-  const totalBal = ACCOUNTS_DATA.reduce((s,a) => s+a.balance, 0);
+  const totalBal = ACCOUNTS_DATA.reduce((s, a) => s + a.balance, 0);
   document.getElementById("acc-total").textContent = rupiah(totalBal);
   const container = document.getElementById("acc-rows");
   container.innerHTML = "";
@@ -1263,8 +1381,8 @@ function renderAccounts() {
       </div>
       <div style="text-align:right;">
         <div class="acc-balance">${rupiah(a.balance)}</div>
-        <div class="acc-sync ${a.syncOk?"":"fail"}">
-          ${a.syncOk?'<span class="sync-status-live"><i class="ti ti-circle-check"></i></span>':''}<span class="acc-sync-text">${a.sync}</span>
+        <div class="acc-sync ${a.syncOk ? "" : "fail"}">
+          ${a.syncOk ? '<span class="sync-status-live"><i class="ti ti-circle-check"></i></span>' : ''}<span class="acc-sync-text">${a.sync}</span>
         </div>
       </div>`;
     container.appendChild(row);
@@ -1275,19 +1393,37 @@ function renderAccounts() {
    REPORTS
 ============================================================ */
 function renderReports() {
-  const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
-  const now    = new Date();
-  document.getElementById("report-title").textContent = `Ringkasan ${months[now.getMonth()]} ${now.getFullYear()}`;
-  document.getElementById("report-spent").textContent  = rupiah(getTotalSpent());
-  document.getElementById("report-income").textContent = rupiah(getTotalIncome());
+  const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+  const now = new Date();
+  const totalSpent = getTotalSpent();
+  const totalIncome = getTotalIncome();
+  const netFlow = totalIncome - totalSpent;
+  const spentByCategory = getSpentByCategory();
+  const rankedCategories = CATEGORIES
+    .map(c => ({ ...c, amount: spentByCategory[c.id] || 0 }))
+    .filter(c => c.amount > 0)
+    .sort((a, b) => b.amount - a.amount);
+  const largestCategory = rankedCategories[0];
 
-  const spent  = getSpentByCategory();
-  const total  = getTotalSpent() || 1;
-  const sorted = CATEGORIES.map(c=>({...c,amount:spent[c.id]||0})).filter(c=>c.amount>0).sort((a,b)=>b.amount-a.amount).slice(0,5);
+  document.getElementById("report-title").textContent = `Ringkasan ${months[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById("report-period-note").textContent = "Berdasarkan transaksi yang tercatat pada prototype.";
+  document.getElementById("report-spent").textContent = rupiah(totalSpent);
+  document.getElementById("report-income").textContent = rupiah(totalIncome);
+  document.getElementById("report-net").textContent = rupiah(netFlow);
+  document.getElementById("report-active-period").textContent = `${months[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById("report-spent-note").textContent = "Total pengeluaran tercatat";
+  document.getElementById("report-income-note").textContent = "Total pemasukan tercatat";
+
+  const total = totalSpent || 1;
+  const visibleCategories = rankedCategories.slice(0, 5);
+  const remainingAmount = rankedCategories.slice(5).reduce((sum, c) => sum + c.amount, 0);
+  if (remainingAmount > 0) visibleCategories.push({ name: "Lainnya", amount: remainingAmount, color: "#5F5E5A", bg: "#F1EFE8", icon: "ti-dots" });
   const catList = document.getElementById("report-cat-list");
   catList.innerHTML = "";
-  sorted.forEach(c => {
-    const pct = Math.round((c.amount/total)*100);
+  let displayedPct = 0;
+  visibleCategories.forEach((c, index) => {
+    const pct = index === visibleCategories.length - 1 ? 100 - displayedPct : Math.round((c.amount / total) * 100);
+    displayedPct += pct;
     const row = document.createElement("div");
     row.className = "spending-summary-row";
     row.innerHTML = `
@@ -1302,18 +1438,22 @@ function renderReports() {
     catList.appendChild(row);
   });
 
-  const aiList = document.getElementById("ai-insights-list");
-  aiList.innerHTML = "";
-  AI_INSIGHTS.forEach(ins => {
+  const insightsList = document.getElementById("report-insights-list");
+  insightsList.innerHTML = "";
+  const insights = largestCategory ? [
+    { title: "Kategori utama pengeluaran", body: `${largestCategory.name} menyumbang ${Math.round((largestCategory.amount / total) * 100)}% dari total ${rupiah(totalSpent)} pengeluaran.`, accent: "var(--primary)" },
+    { title: "Arus kas periode ini", body: `${netFlow >= 0 ? "Pemasukan masih lebih besar" : "Pengeluaran lebih besar"} dengan selisih ${rupiah(Math.abs(netFlow))}.`, accent: netFlow >= 0 ? "var(--success)" : "var(--danger)" },
+  ] : [{ title: "Belum ada insight", body: "Tambahkan transaksi untuk melihat ringkasan keuangan yang relevan.", accent: "var(--primary)" }];
+  insights.forEach(ins => {
     const item = document.createElement("div");
-    item.className = "ai-insight-item";
+    item.className = "report-insight-item";
     item.innerHTML = `
-      <div class="ai-accent" style="background:${ins.accent};"></div>
+      <div class="report-insight-accent" style="background:${ins.accent};"></div>
       <div style="padding-left:12px;">
         <div style="font-family:'Geist',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:3px;">${ins.title}</div>
         <div style="font-size:13px;color:var(--text-muted);line-height:1.55;">${ins.body}</div>
       </div>`;
-    aiList.appendChild(item);
+    insightsList.appendChild(item);
   });
 
   const tbody = document.getElementById("prev-reports-body");
@@ -1323,24 +1463,24 @@ function renderReports() {
     tr.innerHTML = `
       <td>
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:34px;height:34px;background:${r.positive?"var(--primary-tint)":"var(--chip-bg)"};border-radius:8px;display:flex;align-items:center;justify-content:center;color:${r.positive?"var(--primary)":"var(--text-muted)"};">
+          <div style="width:34px;height:34px;background:${r.positive ? "var(--primary-tint)" : "var(--chip-bg)"};border-radius:8px;display:flex;align-items:center;justify-content:center;color:${r.positive ? "var(--primary)" : "var(--text-muted)"};">
             <i class="ti ti-file-text" style="font-size:15px;"></i>
           </div>
           <div>
             <div style="font-family:'Geist',sans-serif;font-size:13.5px;font-weight:600;">${r.month}</div>
-            <div style="font-size:11.5px;color:var(--text-faint);">Dibuat awal bulan</div>
+            <div style="font-size:11.5px;color:var(--text-faint);">Periode historis demo</div>
           </div>
         </div>
       </td>
       <td style="color:var(--text-muted);">${rupiah(r.spent)}</td>
       <td>
-        <div style="display:flex;align-items:center;gap:4px;font-family:'Geist',sans-serif;font-size:12px;font-weight:700;color:${r.positive?"var(--success)":"var(--danger)"};">
-          <i class="ti ${r.positive?"ti-trending-up":"ti-trending-down"}" style="font-size:13px;"></i>
-          ${r.positive?"+":""}${rupiah(r.net)}
+        <div style="display:flex;align-items:center;gap:4px;font-family:'Geist',sans-serif;font-size:12px;font-weight:700;color:${r.positive ? "var(--success)" : "var(--danger)"};">
+          <i class="ti ${r.positive ? "ti-trending-up" : "ti-trending-down"}" style="font-size:13px;"></i>
+          ${r.positive ? "+" : ""}${rupiah(r.net)}
         </div>
       </td>
       <td style="text-align:right;">
-        <button style="font-size:17px;color:var(--text-faint);" aria-label="Download laporan ${r.month}" onclick="showToast('Download PDF ${r.month}','ti-download')"><i class="ti ti-download"></i></button>
+        <button style="font-size:17px;color:var(--text-faint);" aria-label="Ekspor laporan ${r.month}" onclick="showToast('Ekspor PDF belum tersedia pada prototype.','ti-info-circle')"><i class="ti ti-download"></i></button>
       </td>`;
     tbody.appendChild(tr);
   });
@@ -1356,9 +1496,9 @@ function renderUpgrade() {
     opt.classList.toggle("active", opt.dataset.billing === billingMode);
   });
   const proPrice = billingMode === "yearly" ? 23200 : 29000;
-  const hhPrice  = billingMode === "yearly" ? 47200 : 59000;
+  const hhPrice = billingMode === "yearly" ? 47200 : 59000;
   const fmt = n => "Rp " + n.toLocaleString("id-ID");
-  document.getElementById("pro-price").textContent       = fmt(proPrice);
+  document.getElementById("pro-price").textContent = fmt(proPrice);
   document.getElementById("household-price").textContent = fmt(hhPrice);
 }
 
@@ -1403,35 +1543,35 @@ function stopAutoSync() {
 }
 
 const SYNC_TX_POOL = [
-  { desc:"Transfer masuk dari Shopee",    cat:"lainnya",   type:"income",  min:50000,  max:350000  },
-  { desc:"Cashback GoPay",                cat:"lainnya",   type:"income",  min:5000,   max:25000   },
-  { desc:"Top-up OVO dari BCA",           cat:"lainnya",   type:"expense", min:50000,  max:200000  },
-  { desc:"Pembayaran QRIS Warteg",        cat:"makan",     type:"expense", min:12000,  max:30000   },
-  { desc:"Auto-debit Spotify",            cat:"pulsa",     type:"expense", min:54990,  max:54990   },
-  { desc:"Transfer dari orang tua",       cat:"lainnya",   type:"income",  min:500000, max:1500000 },
-  { desc:"Bayar parkir kampus",           cat:"transport", type:"expense", min:2000,   max:5000    },
-  { desc:"Beli snack Indomaret",          cat:"makan",     type:"expense", min:10000,  max:45000   },
-  { desc:"Refund belanja online",         cat:"belanja",   type:"income",  min:30000,  max:150000  },
-  { desc:"Iuran Wi-Fi kos",              cat:"pulsa",     type:"expense", min:50000,  max:100000  },
-  { desc:"Jual buku bekas",              cat:"lainnya",   type:"income",  min:25000,  max:80000   },
-  { desc:"Bayar laundry express",         cat:"kos",       type:"expense", min:15000,  max:35000   },
+  { desc: "Transfer masuk dari Shopee", cat: "lainnya", type: "income", min: 50000, max: 350000 },
+  { desc: "Cashback GoPay", cat: "lainnya", type: "income", min: 5000, max: 25000 },
+  { desc: "Top-up OVO dari BCA", cat: "lainnya", type: "expense", min: 50000, max: 200000 },
+  { desc: "Pembayaran QRIS Warteg", cat: "makan", type: "expense", min: 12000, max: 30000 },
+  { desc: "Auto-debit Spotify", cat: "pulsa", type: "expense", min: 54990, max: 54990 },
+  { desc: "Transfer dari orang tua", cat: "lainnya", type: "income", min: 500000, max: 1500000 },
+  { desc: "Bayar parkir kampus", cat: "transport", type: "expense", min: 2000, max: 5000 },
+  { desc: "Beli snack Indomaret", cat: "makan", type: "expense", min: 10000, max: 45000 },
+  { desc: "Refund belanja online", cat: "belanja", type: "income", min: 30000, max: 150000 },
+  { desc: "Iuran Wi-Fi kos", cat: "pulsa", type: "expense", min: 50000, max: 100000 },
+  { desc: "Jual buku bekas", cat: "lainnya", type: "income", min: 25000, max: 80000 },
+  { desc: "Bayar laundry express", cat: "kos", type: "expense", min: 15000, max: 35000 },
 ];
 
 function generateSyncTransaction() {
   const template = SYNC_TX_POOL[Math.floor(Math.random() * SYNC_TX_POOL.length)];
   const amount = Math.round((template.min + Math.random() * (template.max - template.min)) / 1000) * 1000;
-  const accountIds = ["gopay","bca","dana","cash"];
-  const tagIds = ["pribadi","organisasi","kuliah","lainnya"];
+  const accountIds = ["gopay", "bca", "dana", "cash"];
+  const tagIds = ["pribadi", "organisasi", "kuliah", "lainnya"];
 
   return {
-    id:      newTxId(),
-    date:    new Date(),
-    desc:    template.desc,
-    cat:     template.cat,
+    id: newTxId(),
+    date: new Date(),
+    desc: template.desc,
+    cat: template.cat,
     account: accountIds[Math.floor(Math.random() * accountIds.length)],
-    amount:  template.type === "income" ? amount : -amount,
-    type:    template.type,
-    tag:     tagIds[Math.floor(Math.random() * tagIds.length)],
+    amount: template.type === "income" ? amount : -amount,
+    type: template.type,
+    tag: tagIds[Math.floor(Math.random() * tagIds.length)],
   };
 }
 
@@ -1470,7 +1610,7 @@ function performSync(silent) {
   if (!silent) {
     const tx = state.transactions[state.transactions.length - 1];
     const label = tx.type === "income" ? "+" + rupiah(tx.amount) : rupiah(tx.amount);
-    showToast(`Sync selesai — "${tx.desc}" (${label})`, "ti-cloud-check");
+    showToast(`Sinkronisasi simulasi selesai — "${tx.desc}" (${label})`, "ti-cloud-check");
   }
 }
 
@@ -1478,15 +1618,15 @@ function updateAllSyncTimestamps() {
   const elapsed = Math.round((Date.now() - lastSyncTime) / 1000);
   ACCOUNTS_DATA.forEach(a => {
     if (a.id === "cash") {
-      a.sync = "Diperbarui otomatis";
+      a.sync = "Manual · tersimpan";
     } else if (elapsed < 5) {
-      a.sync = "Baru saja";
+      a.sync = "Simulasi · baru saja";
     } else if (elapsed < 60) {
-      a.sync = elapsed + " detik lalu";
+      a.sync = "Simulasi · " + elapsed + " detik lalu";
     } else if (elapsed < 3600) {
-      a.sync = Math.floor(elapsed / 60) + " menit lalu";
+      a.sync = "Simulasi · " + Math.floor(elapsed / 60) + " menit lalu";
     } else {
-      a.sync = Math.floor(elapsed / 3600) + " jam lalu";
+      a.sync = "Simulasi · " + Math.floor(elapsed / 3600) + " jam lalu";
     }
   });
 }
@@ -1555,9 +1695,9 @@ function getTimeAgo(date) {
   const s = Math.round((Date.now() - date.getTime()) / 1000);
   if (s < 10) return "Baru saja";
   if (s < 60) return s + " detik lalu";
-  if (s < 3600) return Math.floor(s/60) + " menit lalu";
-  if (s < 86400) return Math.floor(s/3600) + " jam lalu";
-  return Math.floor(s/86400) + " hari lalu";
+  if (s < 3600) return Math.floor(s / 60) + " menit lalu";
+  if (s < 86400) return Math.floor(s / 3600) + " jam lalu";
+  return Math.floor(s / 86400) + " hari lalu";
 }
 
 document.getElementById("btn-notif").addEventListener("click", e => {
@@ -1590,7 +1730,7 @@ function checkBudgetAlerts() {
   Object.keys(state.categoryBudgets).forEach(catId => {
     const budget = state.categoryBudgets[catId];
     const used = spent[catId] || 0;
-    const pct = Math.round((used/budget)*100);
+    const pct = Math.round((used / budget) * 100);
     const c = getCat(catId);
 
     if (pct >= 100 && !alertedCategories.has(catId + "-over")) {
@@ -1609,7 +1749,7 @@ function checkBudgetAlerts() {
   });
 
   const totalSpent = getTotalSpent();
-  const totalPct = Math.round((totalSpent/state.monthlyBudgetTotal)*100);
+  const totalPct = Math.round((totalSpent / state.monthlyBudgetTotal) * 100);
   if (totalPct >= 100 && !alertedCategories.has("total-over")) {
     alertedCategories.add("total-over");
     addNotification(
