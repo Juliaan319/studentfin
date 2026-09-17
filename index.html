@@ -2048,77 +2048,352 @@
       background: var(--primary-tint);
     }
 
-    /* ---- Upgrade Page ---- */
+    /* ============================================================
+       UPGRADE PRO PAGE — MODERN, HIGH CONVERTING & ANIMATED
+    ============================================================ */
+    .upgrade-container {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+    }
+
+    /* Ambient background glow & animated floating orbs */
+    .upgrade-hero-ambient {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      padding: 44px 20px 36px;
+      margin-bottom: 34px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(53, 37, 205, 0.05) 0%, rgba(123, 110, 255, 0.02) 100%);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 20px -2px rgba(53, 37, 205, 0.04);
+    }
+
+    [data-theme="dark"] .upgrade-hero-ambient {
+      background: linear-gradient(180deg, rgba(123, 110, 255, 0.12) 0%, rgba(30, 26, 58, 0.4) 100%);
+      border-color: rgba(123, 110, 255, 0.2);
+    }
+
+    .upgrade-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(55px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .upgrade-orb-1 {
+      width: 320px;
+      height: 320px;
+      top: -100px;
+      left: 10%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(168, 85, 247, 0.15) 70%, transparent 100%);
+      animation: orbFloat 9s ease-in-out infinite alternate;
+    }
+
+    .upgrade-orb-2 {
+      width: 280px;
+      height: 280px;
+      bottom: -60px;
+      right: 12%;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, rgba(53, 37, 205, 0.15) 70%, transparent 100%);
+      animation: orbFloat 11s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-18px) scale(1.06) translateX(12px); }
+      100% { transform: translateY(12px) scale(0.96) translateX(-10px); }
+    }
+
+    .upgrade-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Top pill badge */
+    .upgrade-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, rgba(53, 37, 205, 0.1), rgba(236, 72, 153, 0.1));
+      border: 1px solid rgba(123, 110, 255, 0.35);
+      color: var(--primary);
+      font-family: 'Geist', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(53, 37, 205, 0.08);
+      animation: pillShine 4s ease-in-out infinite;
+    }
+
+    [data-theme="dark"] .upgrade-pill-badge {
+      background: linear-gradient(135deg, rgba(123, 110, 255, 0.25), rgba(236, 72, 153, 0.2));
+      border-color: rgba(123, 110, 255, 0.45);
+      color: #EDE9FF;
+    }
+
+    @keyframes pillShine {
+      0%, 100% { box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15); }
+      50% { box-shadow: 0 4px 22px rgba(236, 72, 153, 0.35); }
+    }
+
+    .upgrade-sparkle-spin {
+      display: inline-block;
+      color: #FFB95F;
+      animation: sparkleRotate 4s ease-in-out infinite;
+    }
+
+    @keyframes sparkleRotate {
+      0% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(15deg) scale(1.2); }
+      50% { transform: rotate(0deg) scale(1); }
+      75% { transform: rotate(-15deg) scale(1.2); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    .upgrade-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .upgrade-title-gradient {
+      background: linear-gradient(135deg, var(--primary) 0%, #7C3AED 50%, #EC4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    [data-theme="dark"] .upgrade-title-gradient {
+      background: linear-gradient(135deg, #A5B4FC 0%, #C084FC 50%, #F472B6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .upgrade-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    /* Billing toggle */
+    .billing-toggle-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .billing-toggle {
       display: inline-flex;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+      align-items: center;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
       border-radius: 9999px;
       padding: 4px;
-      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    [data-theme="dark"] .billing-toggle {
+      background: var(--surface-2);
     }
 
     .billing-opt {
-      padding: 7px 20px;
+      padding: 8px 20px;
       border-radius: 9999px;
       font-family: 'Geist', sans-serif;
       font-size: 13.5px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all .15s;
+      transition: all .2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       align-items: center;
       gap: 6px;
+      position: relative;
+      z-index: 1;
+      user-select: none;
     }
 
     .billing-opt.active {
       background: var(--primary);
       color: white;
+      box-shadow: 0 4px 12px rgba(53, 37, 205, 0.3);
     }
 
     .discount-badge {
-      background: var(--indigo-soft);
-      color: var(--primary);
+      background: rgba(255, 185, 95, 0.25);
+      color: #b45309;
       font-size: 11px;
       font-weight: 700;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      animation: discountPulse 2s infinite ease-in-out;
+    }
+
+    [data-theme="dark"] .discount-badge {
+      background: rgba(255, 185, 95, 0.25);
+      color: #FBBF24;
     }
 
     .billing-opt.active .discount-badge {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
       color: white;
     }
 
+    @keyframes discountPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    /* ---- Plans Grid ---- */
     .plans-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 28px;
+      grid-template-columns: 1fr 1.06fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+      margin-bottom: 44px;
+    }
+
+    @media (max-width: 960px) {
+      .plans-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     .plan-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
-      gap: 0;
       box-shadow: var(--shadow-card);
+      position: relative;
+      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s, border-color .3s;
+      animation: cardEntrance .5s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
+    .plan-card:nth-child(1) { animation-delay: 0.05s; }
+    .plan-card:nth-child(2) { animation-delay: 0.15s; }
+    .plan-card:nth-child(3) { animation-delay: 0.25s; }
+
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .plan-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.12);
+      border-color: rgba(123, 110, 255, 0.5);
+    }
+
+    [data-theme="dark"] .plan-card:hover {
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* FEATURED (PRO) CARD */
     .plan-card.featured {
-      background: var(--primary);
-      border-color: rgba(123, 110, 255, 0.3);
+      background: linear-gradient(165deg, #1E1664 0%, #171047 50%, #0F0A30 100%);
+      border: 2px solid rgba(123, 110, 255, 0.5);
       color: white;
+      box-shadow: 0 20px 48px -12px rgba(53, 37, 205, 0.38), 0 0 0 1.5px rgba(123, 110, 255, 0.5);
+      position: relative;
+      transform: scale(1.02);
+      z-index: 2;
+    }
+
+    [data-theme="dark"] .plan-card.featured {
+      background: linear-gradient(165deg, #1A173A 0%, #14112E 50%, #0D0B1F 100%);
+      box-shadow: 0 24px 50px -10px rgba(99, 102, 241, 0.3), 0 0 0 1.5px rgba(168, 85, 247, 0.6);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
+
+    .plan-card.featured:hover {
+      transform: scale(1.02) translateY(-6px);
+      box-shadow: 0 28px 60px -10px rgba(99, 102, 241, 0.48), 0 0 0 2px rgba(192, 132, 252, 0.8);
+    }
+
+    /* Floating glowing tag on featured card */
+    .most-popular-tag {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #FFB95F 0%, #FF8A00 100%);
+      color: #4A2500;
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 16px rgba(255, 138, 0, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      animation: floatBadge 3s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-3px); }
+    }
+
+    .plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .plan-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+    }
+
+    .plan-card.featured .plan-badge {
+      background: rgba(255, 255, 255, 0.15);
+      color: #EDE9FF;
     }
 
     .plan-name {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 5px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
     }
 
     .plan-card.featured .plan-name {
@@ -2130,35 +2405,106 @@
       color: var(--text-muted);
       margin-bottom: 18px;
       line-height: 1.5;
+      min-height: 38px;
     }
 
     .plan-card.featured .plan-desc {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(237, 233, 255, 0.82);
+    }
+
+    .plan-pricing-wrap {
+      margin-bottom: 14px;
+    }
+
+    .plan-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
     }
 
     .plan-price {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 3px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      transition: transform .2s ease;
+    }
+
+    .plan-card.featured .plan-price {
+      color: white;
     }
 
     .plan-period {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .plan-card.featured .plan-period {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(237, 233, 255, 0.7);
+    }
+
+    .plan-original-price {
+      font-size: 13px;
+      color: var(--text-faint);
+      text-decoration: line-through;
+      margin-top: 2px;
+      display: none;
+    }
+
+    .plan-card.featured .plan-original-price {
+      color: rgba(237, 233, 255, 0.6);
+    }
+
+    .plan-savings-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #10B981;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .plan-card.featured .plan-savings-pill {
+      background: rgba(108, 248, 187, 0.18);
+      color: #6CF8BB;
     }
 
     .plan-divider {
       height: 1px;
-      background: var(--border);
+      background: var(--border-soft);
       margin: 18px 0;
     }
 
     .plan-card.featured .plan-divider {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .plan-features-label {
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+
+    .plan-card.featured .plan-features-label {
+      color: rgba(237, 233, 255, 0.65);
+    }
+
+    .plan-features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 22px;
+      flex: 1;
     }
 
     .plan-feature {
@@ -2166,78 +2512,797 @@
       align-items: flex-start;
       gap: 10px;
       font-size: 13.5px;
-      margin-bottom: 10px;
-    }
-
-    .plan-feature i {
-      font-size: 15px;
-      flex-shrink: 0;
-      margin-top: 2px;
+      line-height: 1.45;
+      color: var(--text);
     }
 
     .plan-card.featured .plan-feature {
-      color: white;
+      color: rgba(255, 255, 255, 0.95);
     }
 
-    .plan-card.featured .plan-feature i {
+    .plan-feature-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plan-card.featured .plan-feature-icon {
+      background: rgba(108, 248, 187, 0.2);
       color: #6CF8BB;
+      box-shadow: 0 0 10px rgba(108, 248, 187, 0.25);
+    }
+
+    .plan-card.featured .plan-feature-icon.sparkle {
+      background: rgba(255, 185, 95, 0.25);
+      color: #FFB95F;
+      box-shadow: 0 0 10px rgba(255, 185, 95, 0.3);
     }
 
     .plan-btn {
       margin-top: auto;
-      padding: 11px;
-      border-radius: 10px;
+      padding: 13px 20px;
+      border-radius: 12px;
       font-family: 'Geist', sans-serif;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 700;
       text-align: center;
       cursor: pointer;
-      transition: all .15s;
-      display: block;
+      transition: all .2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
       border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-btn.disabled {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      cursor: default;
     }
 
     .plan-btn.outline {
       background: transparent;
       border: 1.5px solid var(--border);
-      color: var(--text-muted);
+      color: var(--text);
     }
 
     .plan-btn.outline:hover {
       border-color: var(--primary);
       color: var(--primary);
+      background: var(--primary-tint);
     }
 
     .plan-btn.solid-white {
       background: white;
-      color: var(--primary);
+      color: #1E1664;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     .plan-btn.solid-white:hover {
-      opacity: .9;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      background: #FAF8FF;
     }
 
     .plan-btn.solid-primary {
       background: var(--primary);
       color: white;
+      box-shadow: 0 6px 18px rgba(53, 37, 205, 0.25);
     }
 
     .plan-btn.solid-primary:hover {
-      background: #2c1ea8;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(53, 37, 205, 0.35);
+      filter: brightness(1.05);
     }
 
-    .most-popular-tag {
-      display: inline-block;
-      background: #FFB95F;
-      color: #653E00;
-      padding: 3px 10px;
-      border-radius: 9999px;
-      font-family: 'Geist', sans-serif;
+    /* Animated sheen light effect on Pro button */
+    .btn-sheen {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-sheen::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      transform: skewX(-20deg);
+      animation: sheenMove 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes sheenMove {
+      0% { left: -100%; }
+      30%, 100% { left: 200%; }
+    }
+
+    .plan-guarantee-note {
       font-size: 11.5px;
+      text-align: center;
+      margin-top: 10px;
+      color: rgba(237, 233, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    /* ---- SAVINGS ROI CALCULATOR WIDGET ---- */
+    .savings-calc-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 44px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .savings-calc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .calc-title-group h2 {
+      font-size: 20px;
       font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calc-title-group p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .calc-slider-wrap {
+      margin-bottom: 22px;
+    }
+
+    .calc-slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .calc-slider-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .calc-current-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Geist', sans-serif;
+    }
+
+    .calc-range-input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 6px;
+      background: var(--border);
+      outline: none;
+      transition: background .2s;
+    }
+
+    .calc-range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(53, 37, 205, 0.4);
+      border: 2px solid white;
+      transition: transform .15s ease;
+    }
+
+    .calc-range-input::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .calc-presets {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .calc-preset-btn {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .calc-preset-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-tint);
+    }
+
+    .calc-preset-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Calculator Results Grid */
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.3fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 768px) {
+      .calc-results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-result-box {
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .calc-result-box.highlight {
+      background: linear-gradient(135deg, rgba(0, 108, 73, 0.1) 0%, rgba(108, 248, 187, 0.15) 100%);
+      border: 1.5px solid rgba(0, 108, 73, 0.3);
+    }
+
+    [data-theme="dark"] .calc-result-box.highlight {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.12) 0%, rgba(13, 43, 28, 0.6) 100%);
+      border-color: rgba(74, 222, 128, 0.35);
+    }
+
+    .calc-result-box .label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
       letter-spacing: .04em;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
+    }
+
+    .calc-result-box .val {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: 'Geist', sans-serif;
+      color: var(--text);
+    }
+
+    .calc-result-box.highlight .val {
+      color: var(--success);
+    }
+
+    .calc-result-box .subtext {
+      font-size: 11.5px;
+      color: var(--text-faint);
+      margin-top: 6px;
+    }
+
+    .calc-result-box.highlight .subtext {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    /* ---- FEATURE COMPARISON MATRIX (ACCORDION) ---- */
+    .comparison-section {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 44px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .comparison-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .comparison-title-wrap h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .comparison-title-wrap p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .comparison-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      transition: transform .25s ease, background .15s;
+    }
+
+    .comparison-header.open .comparison-toggle-btn {
+      transform: rotate(180deg);
+      background: var(--primary-tint);
+      color: var(--primary);
+    }
+
+    .comparison-table-wrap {
+      margin-top: 22px;
+      overflow-x: auto;
+      display: none;
+      animation: fadeInTable .3s ease both;
+    }
+
+    .comparison-table-wrap.open {
+      display: block;
+    }
+
+    @keyframes fadeInTable {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .comparison-table th {
+      font-family: 'Geist', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--surface-2);
+    }
+
+    .comparison-table th.col-pro,
+    .comparison-table td.col-pro {
+      background: var(--primary-tint);
+      font-weight: 600;
+    }
+
+    .comparison-table td:nth-child(2),
+    .comparison-table td:nth-child(3),
+    .comparison-table td:nth-child(4) {
+      text-align: center;
+    }
+
+    .comparison-table th:nth-child(2),
+    .comparison-table th:nth-child(3),
+    .comparison-table th:nth-child(4) {
+      text-align: center;
+    }
+
+    /* ---- STUDENT TESTIMONIALS ---- */
+    .testimonials-section {
+      margin-bottom: 44px;
+    }
+
+    .testimonials-title-wrap {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .testimonials-title-wrap h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .testimonials-title-wrap p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 860px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border-color: rgba(123, 110, 255, 0.4);
+    }
+
+    .testimonial-stars {
+      color: #FFB95F;
+      font-size: 14px;
+      display: flex;
+      gap: 3px;
+    }
+
+    .testimonial-quote {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4F46E5, #9333EA);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .author-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .author-campus {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* ---- FAQ SECTION ---- */
+    .faq-section {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 30px;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .faq-header h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .faq-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(123, 110, 255, 0.4);
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-size: 14.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--surface);
+      transition: background .15s;
+    }
+
+    .faq-question:hover {
+      background: var(--surface-2);
+    }
+
+    .faq-icon {
+      font-size: 16px;
+      color: var(--text-faint);
+      transition: transform .25s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    .faq-answer {
+      padding: 0 20px 16px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+      animation: faqSlideDown .25s ease both;
+    }
+
+    @keyframes faqSlideDown {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- CHECKOUT MODAL STYLES ---- */
+    .checkout-plan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .checkout-summary-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .summary-row.total {
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+      margin-top: 10px;
+      margin-bottom: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .payment-methods-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .payment-method-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      transition: all .15s ease;
+    }
+
+    .payment-method-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-tint);
+    }
+
+    .payment-method-card.active {
+      border-color: var(--primary);
+      background: var(--primary-tint);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .pm-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: var(--primary);
+    }
+
+    .pm-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .pm-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .voucher-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .voucher-input-group input {
+      flex: 1;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      background: var(--surface);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: .05em;
+      outline: none;
+    }
+
+    .voucher-input-group input:focus {
+      border-color: var(--primary);
+    }
+
+    .voucher-btn {
+      padding: 9px 16px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .voucher-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Celebration Screen in Modal */
+    .checkout-success-view {
+      text-align: center;
+      padding: 24px 10px 10px;
+    }
+
+    .celebrate-icon-box {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      margin: 0 auto 16px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+      animation: celebratePop .5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+
+    @keyframes celebratePop {
+      0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .user-pro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(135deg, #FFB95F 0%, #FF8A00 100%);
+      color: #4A2500;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+      letter-spacing: .04em;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .price-bump {
+      animation: priceBumpAnim .25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes priceBumpAnim {
+      0% { transform: scale(0.92); opacity: 0.7; }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     /* ---- MODAL — Quick Add (redesigned) ---- */
@@ -4558,67 +5623,380 @@
 
         <!-- ===== UPGRADE ===== -->
         <div class="page hidden" id="page-upgrade">
-          <div style="max-width:600px;margin:0 auto;text-align:center;padding:40px 0 28px;">
-            <div
-              style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:9999px;background:var(--primary-light);color:var(--primary);font-family:'Geist',sans-serif;font-size:11.5px;font-weight:700;margin-bottom:14px;letter-spacing:.04em;">
-              <i class="ti ti-sparkles" style="font-size:13px;color:#FFB95F;"></i>PRO FEATURES
+          <div class="upgrade-container">
+
+            <!-- Hero with ambient aura & animated floating orbs -->
+            <div class="upgrade-hero-ambient">
+              <div class="upgrade-orb upgrade-orb-1"></div>
+              <div class="upgrade-orb upgrade-orb-2"></div>
+              <div class="upgrade-hero-content">
+                <div class="upgrade-pill-badge">
+                  <i class="ti ti-sparkles upgrade-sparkle-spin"></i> PRO EXCLUSIVE · KHUSUS MAHASISWA & GEN-Z
+                </div>
+                <h1 class="upgrade-title">
+                  Kelola Finansial Lebih Cerdas, <br>
+                  <span class="upgrade-title-gradient">Raih Bebas Finansial Lebih Cepat</span> ⚡
+                </h1>
+                <p class="upgrade-desc">
+                  Kendalikan uang jajan tanpa rasa bersalah. Dapatkan AI Financial Advisor otomatis, dompet tanpa batas, analitik cerdas, dan laporan keuangan komprehensif.
+                </p>
+                <div class="billing-toggle-wrapper">
+                  <div class="billing-toggle" id="billing-toggle">
+                    <div class="billing-opt active" data-billing="monthly">Bulanan</div>
+                    <div class="billing-opt" data-billing="yearly">
+                      <span>Tahunan</span>
+                      <span class="discount-badge"><i class="ti ti-flame"></i> -20% HEMAT</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h1 style="font-size:30px;font-weight:700;margin-bottom:10px;">Tingkatkan Perjalanan Finansialmu</h1>
-            <div style="font-size:16px;color:var(--text-muted);line-height:1.6;">Kendalikan penuh budget dengan akun tak
-              terbatas, insight AI, dan laporan canggih.</div>
-            <div class="billing-toggle" id="billing-toggle">
-              <div class="billing-opt active" data-billing="monthly">Bulanan</div>
-              <div class="billing-opt" data-billing="yearly">Tahunan <span class="discount-badge">-20%</span></div>
+
+            <!-- The 3 Modern Pricing Cards -->
+            <div class="plans-grid">
+              <!-- Free Plan -->
+              <div class="plan-card">
+                <div class="plan-header">
+                  <div class="plan-name">Free</div>
+                  <span class="plan-badge">Paket Dasar</span>
+                </div>
+                <div class="plan-desc">Alat esensial untuk pencatatan transaksi harian mahasiswa.</div>
+                <div class="plan-pricing-wrap">
+                  <div class="plan-price-row">
+                    <span class="plan-price">Rp 0</span>
+                    <span class="plan-period">/bulan</span>
+                  </div>
+                  <div class="plan-savings-pill" style="visibility:hidden;display:inline-flex;">Placeholder</div>
+                </div>
+                <div class="plan-divider"></div>
+                <div class="plan-features-label">Fitur Termasuk</div>
+                <div class="plan-features-list">
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span>Maksimal 2 Akun & Dompet</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span>Pencatatan Transaksi Harian</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span>Kategori Standar (6 Kategori)</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span>Ringkasan Anggaran Dasar</span>
+                  </div>
+                </div>
+                <button class="plan-btn disabled"><i class="ti ti-circle-check"></i> Paket Saat Ini</button>
+              </div>
+
+              <!-- Pro Plan (Featured) -->
+              <div class="plan-card featured">
+                <div class="most-popular-tag"><i class="ti ti-crown"></i> PALING BANYAK DIPILIH</div>
+                <div class="plan-header">
+                  <div class="plan-name">Pro</div>
+                  <span class="plan-badge" style="background:rgba(255,255,255,0.2);color:#FFE4B5;"><i class="ti ti-sparkles"></i> Mahasiswa Favorit</span>
+                </div>
+                <div class="plan-desc">Solusi pintar bertenaga AI untuk hentikan kebocoran uang jajan.</div>
+                <div class="plan-pricing-wrap">
+                  <div class="plan-original-price" id="pro-orig-price">Rp 29.000 /bln</div>
+                  <div class="plan-price-row">
+                    <span class="plan-price" id="pro-price">Rp 29.000</span>
+                    <span class="plan-period" id="pro-period">/bulan</span>
+                  </div>
+                  <div class="plan-savings-pill" id="pro-savings-pill">
+                    <i class="ti ti-sparkles"></i> Hemat Rp 69.600/tahun (Hanya Rp 773/hari)
+                  </div>
+                </div>
+                <div class="plan-divider"></div>
+                <div class="plan-features-label">Semua Fitur Pro Tanpa Batas</div>
+                <div class="plan-features-list">
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon sparkle"><i class="ti ti-brain"></i></span>
+                    <span><strong>AI Financial Advisor</strong> — Deteksi kebocoran belanja impulsif</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-wallet"></i></span>
+                    <span><strong>Akun & Dompet Unlimited</strong> (BCA, Mandiri, GoPay, Bibit)</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-target-arrow"></i></span>
+                    <span><strong>Target Tabungan Multi-Goal</strong> (Laptop, Skripsi, Liburan)</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-tags"></i></span>
+                    <span><strong>Kategori & Tag Kustom</strong> tanpa batas</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-file-analytics"></i></span>
+                    <span><strong>Ekspor Laporan PDF & Excel</strong> format elegan</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-cloud-check"></i></span>
+                    <span><strong>Auto-Sync Bank & Prioritas Chat 24/7</strong></span>
+                  </div>
+                </div>
+                <button class="plan-btn solid-white btn-sheen" id="btn-upgrade-pro-action" onclick="openCheckoutModal('pro')">
+                  <i class="ti ti-rocket"></i> Upgrade ke Pro Sekarang
+                </button>
+                <div class="plan-guarantee-note">
+                  <i class="ti ti-shield-check"></i> Garansi 7 hari uang kembali · Batalkan kapan saja
+                </div>
+              </div>
+
+              <!-- Household / Squad Plan -->
+              <div class="plan-card">
+                <div class="plan-header">
+                  <div class="plan-name">Household</div>
+                  <span class="plan-badge">👥 Grup & Anak Kos</span>
+                </div>
+                <div class="plan-desc">Kelola kas kontrakan, listrik, & patungan transparan tanpa drama.</div>
+                <div class="plan-pricing-wrap">
+                  <div class="plan-original-price" id="hh-orig-price">Rp 59.000 /bln</div>
+                  <div class="plan-price-row">
+                    <span class="plan-price" id="household-price">Rp 59.000</span>
+                    <span class="plan-period" id="household-period">/bulan</span>
+                  </div>
+                  <div class="plan-savings-pill" id="hh-savings-pill">
+                    <i class="ti ti-users"></i> Hanya ~Rp 9.440 / orang per bulan
+                  </div>
+                </div>
+                <div class="plan-divider"></div>
+                <div class="plan-features-label">Fitur Tim & Kosan</div>
+                <div class="plan-features-list">
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span><strong>Semua Fitur Pro Lengkap</strong></span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span><strong>Hingga 5 Anggota</strong> dengan akun mandiri</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span><strong>Shared Budgeting</strong> & Rekap Kas Kos</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span><strong>Split Bill & Tagihan Patungan</strong> otomatis</span>
+                  </div>
+                  <div class="plan-feature">
+                    <span class="plan-feature-icon"><i class="ti ti-check"></i></span>
+                    <span><strong>Laporan Arus Kas Tim / Kosan</strong></span>
+                  </div>
+                </div>
+                <button class="plan-btn solid-primary" id="btn-upgrade-hh-action" onclick="openCheckoutModal('household')">
+                  <i class="ti ti-sparkles"></i> Mulai 14 Hari Uji Coba Gratis
+                </button>
+                <div class="plan-guarantee-note" style="color:var(--text-faint);">
+                  <i class="ti ti-credit-card-off"></i> Tanpa perlu kartu kredit
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="plans-grid">
-            <div class="plan-card">
-              <div class="plan-name">Free</div>
-              <div class="plan-desc">Alat esensial untuk budgeting dasar.</div>
-              <div class="plan-price">Rp 0</div>
-              <div class="plan-period">/bulan</div>
-              <div class="plan-divider"></div>
-              <div class="plan-feature"><i class="ti ti-check" style="color:var(--success);"></i><span>Sampai 2
-                  Akun</span></div>
-              <div class="plan-feature"><i class="ti ti-check" style="color:var(--success);"></i><span>Budgeting
-                  Dasar</span></div>
-              <div class="plan-feature"><i class="ti ti-check" style="color:var(--success);"></i><span>Kategori
-                  Standar</span></div>
-              <div style="flex:1;"></div>
-              <button class="plan-btn outline" style="cursor:default;margin-top:22px;">Paket Saat Ini</button>
+
+            <!-- Interactive Student Savings Calculator (ROI) -->
+            <div class="savings-calc-card">
+              <div class="savings-calc-header">
+                <div class="calc-title-group">
+                  <h2><i class="ti ti-calculator" style="color:var(--primary);"></i> Kalkulator Potensi Penghematan Mahasiswa</h2>
+                  <p>Lihat berapa banyak uang jajan yang bisa diselamatkan dari kebocoran impulsif dengan AI StudentFin Pro.</p>
+                </div>
+              </div>
+              <div class="calc-slider-wrap">
+                <div class="calc-slider-label-row">
+                  <span class="calc-slider-label">Rata-rata Pengeluaran Bulanan Kamu:</span>
+                  <span class="calc-current-val" id="calc-expense-val">Rp 2.500.000</span>
+                </div>
+                <input type="range" class="calc-range-input" id="calc-expense-slider" min="500000" max="8000000" step="100000" value="2500000">
+                <div class="calc-presets">
+                  <span style="font-size:12px;color:var(--text-faint);font-weight:600;">Pilihan cepat:</span>
+                  <button type="button" class="calc-preset-btn" data-val="1500000">Hemat (1,5 Jt)</button>
+                  <button type="button" class="calc-preset-btn active" data-val="2500000">Standar (2,5 Jt)</button>
+                  <button type="button" class="calc-preset-btn" data-val="4000000">Aktif (4 Jt)</button>
+                  <button type="button" class="calc-preset-btn" data-val="6000000">Anak Kos Sultan (6 Jt)</button>
+                </div>
+              </div>
+              <div class="calc-results-grid">
+                <div class="calc-result-box">
+                  <div class="label">Kebocoran Uang Rata-rata (18%)</div>
+                  <div class="val" id="calc-leakage-val">Rp 450.000</div>
+                  <div class="subtext">Jajan kafe impulsif, langganan lupa dicancel, dsb.</div>
+                </div>
+                <div class="calc-result-box">
+                  <div class="label">Biaya StudentFin Pro</div>
+                  <div class="val" id="calc-pro-cost">Rp 23.200</div>
+                  <div class="subtext" id="calc-cost-note">Per bulan (paket tahunan hemat 20%)</div>
+                </div>
+                <div class="calc-result-box highlight">
+                  <div class="label">Potensi Uang Terselamatkan</div>
+                  <div class="val" id="calc-net-savings">+ Rp 426.800</div>
+                  <div class="subtext" id="calc-multiplier-badge">🎉 ROI 18x lipat dari biaya langganan!</div>
+                </div>
+              </div>
             </div>
-            <div class="plan-card featured">
-              <div class="most-popular-tag">Paling Populer</div>
-              <div class="plan-name">Pro</div>
-              <div class="plan-desc">Alat canggih, insight AI, dan tanpa batasan.</div>
-              <div class="plan-price" id="pro-price">Rp 29.000</div>
-              <div class="plan-period">/bulan</div>
-              <div class="plan-divider"></div>
-              <div class="plan-feature"><i class="ti ti-check"></i><span>Akun & Dompet Tak Terbatas</span></div>
-              <div class="plan-feature"><i class="ti ti-check"></i><span>Insight Finansial AI</span></div>
-              <div class="plan-feature"><i class="ti ti-check"></i><span>Kategori Budget Kustom</span></div>
-              <div class="plan-feature"><i class="ti ti-check"></i><span>Export CSV Otomatis</span></div>
-              <div class="plan-feature"><i class="ti ti-check"></i><span>Prioritas Support</span></div>
-              <button class="plan-btn solid-white" style="margin-top:auto;"
-                onclick="showToast('Fitur Pro belum tersedia di prototype','ti-lock')">Upgrade ke Pro</button>
+
+            <!-- Detailed Feature Comparison Matrix (Accordion) -->
+            <div class="comparison-section">
+              <div class="comparison-header" id="comparison-toggle-header">
+                <div class="comparison-title-wrap">
+                  <h2>Bandingkan Fitur Lengkap</h2>
+                  <p>Rincian mendalam setiap keunggulan fitur di setiap paket langganan.</p>
+                </div>
+                <div class="comparison-toggle-btn" id="comparison-toggle-btn"><i class="ti ti-chevron-down"></i></div>
+              </div>
+              <div class="comparison-table-wrap" id="comparison-table-wrap">
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th style="width:34%;">FITUR</th>
+                      <th style="width:22%;">FREE</th>
+                      <th style="width:22%;" class="col-pro">PRO ⭐</th>
+                      <th style="width:22%;">HOUSEHOLD</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Jumlah Akun & Dompet</td>
+                      <td>Maksimal 2 Akun</td>
+                      <td class="col-pro"><strong style="color:var(--primary);">Tanpa Batas</strong></td>
+                      <td><strong style="color:var(--primary);">Tanpa Batas</strong></td>
+                    </tr>
+                    <tr>
+                      <td>AI Financial Advisor & Prediksi</td>
+                      <td><i class="ti ti-minus" style="color:var(--text-faint);"></i></td>
+                      <td class="col-pro"><i class="ti ti-check" style="color:var(--success);"></i> Deteksi Kebocoran Otomatis</td>
+                      <td><i class="ti ti-check" style="color:var(--success);"></i> AI Tim & Individu</td>
+                    </tr>
+                    <tr>
+                      <td>Target Tabungan (Savings Goals)</td>
+                      <td>1 Target</td>
+                      <td class="col-pro"><strong style="color:var(--primary);">Multi-Goal Tanpa Batas</strong></td>
+                      <td><strong style="color:var(--primary);">Multi-Goal + Goal Bersama</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Kategori & Tag Transaksi</td>
+                      <td>Standar (Maks 6)</td>
+                      <td class="col-pro"><i class="ti ti-check" style="color:var(--success);"></i> Kustom Bebas + Ikon</td>
+                      <td><i class="ti ti-check" style="color:var(--success);"></i> Kustom Bebas + Tag Kos</td>
+                    </tr>
+                    <tr>
+                      <td>Format Ekspor Laporan</td>
+                      <td>Hanya CSV 1 Bulan</td>
+                      <td class="col-pro"><i class="ti ti-check" style="color:var(--success);"></i> PDF Elegan & CSV Lengkap</td>
+                      <td><i class="ti ti-check" style="color:var(--success);"></i> PDF Elegan, Excel & Rekap Kos</td>
+                    </tr>
+                    <tr>
+                      <td>Jumlah Anggota / Pengguna</td>
+                      <td>1 Pengguna</td>
+                      <td class="col-pro">1 Pengguna (Personal Pro)</td>
+                      <td><strong>Hingga 5 Anggota</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Fitur Kas Kos & Split Bill</td>
+                      <td><i class="ti ti-minus" style="color:var(--text-faint);"></i></td>
+                      <td class="col-pro"><i class="ti ti-minus" style="color:var(--text-faint);"></i></td>
+                      <td><i class="ti ti-check" style="color:var(--success);"></i> Otomatis & Terintegrasi</td>
+                    </tr>
+                    <tr>
+                      <td>Dukungan Pelanggan</td>
+                      <td>Komunitas / Email</td>
+                      <td class="col-pro"><strong style="color:var(--primary);">Prioritas 24/7</strong></td>
+                      <td><strong style="color:var(--primary);">Prioritas 24/7</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="plan-card">
-              <div class="plan-name">Household</div>
-              <div class="plan-desc">Budget bersama untuk anak kos atau keluarga.</div>
-              <div class="plan-price" id="household-price">Rp 59.000</div>
-              <div class="plan-period">/bulan</div>
-              <div class="plan-divider"></div>
-              <div class="plan-feature"><i class="ti ti-check" style="color:var(--success);"></i><span>Semua di
-                  Pro</span></div>
-              <div class="plan-feature"><i class="ti ti-check" style="color:var(--success);"></i><span>Sampai 5
-                  Pengguna</span></div>
-              <div class="plan-feature"><i class="ti ti-check" style="color:var(--success);"></i><span>Budget
-                  Bersama</span></div>
-              <div style="flex:1;"></div>
-              <button class="plan-btn solid-primary" style="margin-top:22px;"
-                onclick="showToast('Fitur Household belum tersedia','ti-lock')">Mulai Trial</button>
+
+            <!-- Student Testimonials Section -->
+            <div class="testimonials-section">
+              <div class="testimonials-title-wrap">
+                <h2>Cerita Teman Mahasiswa yang Sudah Upgrade</h2>
+                <p>Bergabung dengan 12.000+ mahasiswa yang kini lebih bijak mengatur keuangan kampus.</p>
+              </div>
+              <div class="testimonials-grid">
+                <div class="testimonial-card">
+                  <div class="testimonial-stars">
+                    <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+                  </div>
+                  <div class="testimonial-quote">"Semenjak pakai Pro, kebocoran uang jajan di kafe ketahuan semua sama AI Advisor-nya. Tabunganku berhasil terkumpul buat beli laptop baru semester ini!"</div>
+                  <div class="testimonial-author">
+                    <div class="testimonial-avatar">AP</div>
+                    <div>
+                      <div class="author-name">Arya Pratama</div>
+                      <div class="author-campus">Teknik Informatika · UI</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-stars">
+                    <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+                  </div>
+                  <div class="testimonial-quote">"Paket Household dipakai bareng anak satu kontrakan buat catat kas kos, listrik, & air galon. Gak pernah lagi ada drama lupa bayar atau ribut nagih."</div>
+                  <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background:linear-gradient(135deg,#059669,#10B981);">NS</div>
+                    <div>
+                      <div class="author-name">Nadia Safitri</div>
+                      <div class="author-campus">Manajemen Bisnis · UGM</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-stars">
+                    <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+                  </div>
+                  <div class="testimonial-quote">"Harga 20 ribuan per bulan lebih murah dari segelas kopi kekinian, tapi fiturnya lengkap parah. Ekspor PDF-nya rapi banget buat dikirim ke orang tua."</div>
+                  <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background:linear-gradient(135deg,#DC2626,#EA580C);">KR</div>
+                    <div>
+                      <div class="author-name">Kevin Reynaldi</div>
+                      <div class="author-campus">Sistem Informasi · Binus</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+              <div class="faq-header">
+                <h2>Pertanyaan Sering Diajukan (FAQ)</h2>
+                <p>Punya pertanyaan seputar langganan StudentFin? Kami punya jawabannya.</p>
+              </div>
+              <div class="faq-list">
+                <div class="faq-item">
+                  <div class="faq-question">
+                    <span>Apakah saya bisa membatalkan langganan kapan saja?</span>
+                    <i class="ti ti-chevron-down faq-icon"></i>
+                  </div>
+                  <div class="faq-answer">Tentu saja! Kamu bisa membatalkan langganan kapan pun langsung melalui menu profil tanpa ada biaya penalti atau ikatan kontrak sama sekali.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-question">
+                    <span>Metode pembayaran apa saja yang didukung?</span>
+                    <i class="ti ti-chevron-down faq-icon"></i>
+                  </div>
+                  <div class="faq-answer">Kami menerima pembayaran instan via QRIS (GoPay, OVO, DANA, ShopeePay, LinkAja), Virtual Account bank nasional (BCA, Mandiri, BRI, BNI), serta Kartu Debit/Kredit berlogo Visa dan Mastercard.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-question">
+                    <span>Apakah ada diskon tambahan untuk mahasiswa?</span>
+                    <i class="ti ti-chevron-down faq-icon"></i>
+                  </div>
+                  <div class="faq-answer">Ya! Gunakan kode kupon <strong>MAHASISWA</strong> saat checkout untuk mendapatkan potongan diskon tambahan ekstra 15%!</div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-question">
+                    <span>Apakah data keuangan dan transaksi saya aman?</span>
+                    <i class="ti ti-chevron-down faq-icon"></i>
+                  </div>
+                  <div class="faq-answer">Keamanan data adalah prioritas utama kami. Semua data dienkripsi dengan standar enkripsi 256-bit AES dan tidak pernah dibagikan kepada pihak ketiga mana pun tanpa izinmu.</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /upgrade-container -->
         </div>
 
       </div><!-- /main-area -->
@@ -4744,6 +6122,127 @@
     </div>
   </div>
 
+  <!-- ===== CHECKOUT / UPGRADE MODAL ===== -->
+  <div class="modal-overlay" id="modal-upgrade-checkout">
+    <div class="modal-box" style="max-width:480px;">
+      <div class="modal-header" id="checkout-modal-header" style="background:linear-gradient(135deg, var(--primary) 0%, #7C3AED 100%);">
+        <div class="modal-header-inner">
+          <div class="modal-title-group">
+            <div class="modal-eyebrow" id="checkout-plan-eyebrow">AKTIVASI PAKET</div>
+            <div class="modal-title" id="checkout-modal-title">Upgrade ke StudentFin Pro</div>
+            <div class="checkout-plan-pill" id="checkout-plan-badge"><i class="ti ti-sparkles"></i> Paket Pro · Bulanan</div>
+          </div>
+          <button class="modal-close" id="checkout-modal-close" onclick="closeCheckoutModal()"><i class="ti ti-x"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 1: Order Details & Payment -->
+      <div class="modal-body" id="checkout-body-step1">
+        <div class="checkout-summary-box">
+          <div class="summary-row">
+            <span>Paket Dipilih</span>
+            <strong id="chk-summary-name">StudentFin Pro</strong>
+          </div>
+          <div class="summary-row">
+            <span>Siklus Penagihan</span>
+            <span id="chk-summary-period">Bulanan</span>
+          </div>
+          <div class="summary-row">
+            <span>Harga Normal</span>
+            <span id="chk-summary-orig">Rp 29.000</span>
+          </div>
+          <div class="summary-row" id="chk-discount-row" style="color:var(--success);display:none;">
+            <span>Diskon Mahasiswa</span>
+            <strong id="chk-discount-val">- Rp 4.350</strong>
+          </div>
+          <div class="summary-row total">
+            <span>Total Bayar Sekarang</span>
+            <span id="chk-summary-total" style="color:var(--primary);">Rp 29.000</span>
+          </div>
+        </div>
+
+        <!-- Voucher Code Input -->
+        <div class="modal-section" style="margin-bottom:14px;">
+          <div class="modal-label"><i class="ti ti-ticket"></i>Kode Voucher / Kupon Mahasiswa</div>
+          <div class="voucher-input-group">
+            <input type="text" id="chk-voucher-code" placeholder="Coba: MAHASISWA" autocomplete="off" />
+            <button type="button" class="voucher-btn" id="btn-apply-voucher" onclick="applyCheckoutVoucher()">Terapkan</button>
+          </div>
+          <div id="voucher-status-msg" style="font-size:11.5px;margin-top:-10px;margin-bottom:10px;display:none;"></div>
+        </div>
+
+        <!-- Payment Method Selection -->
+        <div class="modal-section" style="margin-bottom:0;">
+          <div class="modal-label"><i class="ti ti-credit-card"></i>Pilih Metode Pembayaran</div>
+          <div class="payment-methods-grid">
+            <div class="payment-method-card active" data-pm="qris" onclick="selectPaymentMethod(this)">
+              <div class="pm-icon-wrap"><i class="ti ti-qrcode"></i></div>
+              <div>
+                <div class="pm-title">QRIS Instan</div>
+                <div class="pm-sub">GoPay, OVO, DANA</div>
+              </div>
+            </div>
+            <div class="payment-method-card" data-pm="bca" onclick="selectPaymentMethod(this)">
+              <div class="pm-icon-wrap"><i class="ti ti-building-bank"></i></div>
+              <div>
+                <div class="pm-title">BCA Virtual</div>
+                <div class="pm-sub">Otomatis verified</div>
+              </div>
+            </div>
+            <div class="payment-method-card" data-pm="mandiri" onclick="selectPaymentMethod(this)">
+              <div class="pm-icon-wrap"><i class="ti ti-building-bank"></i></div>
+              <div>
+                <div class="pm-title">Mandiri VA</div>
+                <div class="pm-sub">Transfer bebas biaya</div>
+              </div>
+            </div>
+            <div class="payment-method-card" data-pm="card" onclick="selectPaymentMethod(this)">
+              <div class="pm-icon-wrap"><i class="ti ti-credit-card"></i></div>
+              <div>
+                <div class="pm-title">Debit / Kredit</div>
+                <div class="pm-sub">Visa, Mastercard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Celebratory Success View (hidden initially) -->
+      <div class="modal-body hidden" id="checkout-body-success">
+        <div class="checkout-success-view">
+          <div class="celebrate-icon-box"><i class="ti ti-crown"></i></div>
+          <h3 style="font-size:22px;font-weight:800;margin-bottom:8px;">Selamat Datang di Pro! 🎉</h3>
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.5;max-width:360px;margin:0 auto 18px;">
+            Aktivasi berhasil! Akunmu sekarang memiliki akses tak terbatas ke semua fitur canggih StudentFin Pro.
+          </p>
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;text-align:left;">
+            <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+              <i class="ti ti-circle-check"></i> FITUR AKTIF SEKARANG:
+            </div>
+            <ul style="font-size:12.5px;color:var(--text-muted);padding-left:18px;line-height:1.6;">
+              <li>AI Financial Advisor & Deteksi Kebocoran</li>
+              <li>Akun & Dompet Tak Terbatas</li>
+              <li>Ekspor Laporan PDF & CSV Lengkap</li>
+              <li>Badge PRO Eksklusif di profilmu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="checkout-footer-step1">
+        <button class="btn-cancel" onclick="closeCheckoutModal()">Batal</button>
+        <button class="btn-save" id="btn-confirm-payment" onclick="processCheckoutPayment()" style="background:linear-gradient(135deg,var(--primary),#7C3AED);">
+          <i class="ti ti-lock"></i><span id="btn-pay-label">Bayar & Aktivasi Sekarang</span>
+        </button>
+      </div>
+      <div class="modal-footer hidden" id="checkout-footer-success">
+        <button class="btn-save" onclick="finishCheckoutCelebration()" style="width:100%;justify-content:center;background:var(--success);">
+          <i class="ti ti-rocket"></i> Mulai Gunakan Fitur Pro
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== CONFIRM DELETE ===== -->
   <div class="confirm-overlay" id="confirm-overlay">
     <div class="confirm-box">
@@ -4760,6 +6259,7 @@
 
   <div class="toast" id="toast"><i class="ti ti-circle-check"></i><span id="toast-text"></span></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="app.js"></script>
 </body>

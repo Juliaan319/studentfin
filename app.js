@@ -1487,27 +1487,389 @@ function renderReports() {
 }
 
 /* ============================================================
-   UPGRADE
+   UPGRADE — MODERN, ANIMATED & INTERACTIVE
 ============================================================ */
 let billingMode = "monthly";
+let activeCheckoutPlan = "pro";
+let activePaymentMethod = "qris";
+let appliedDiscountPct = 0;
+let isUserPro = false;
+let upgradeEventsBound = false;
 
 function renderUpgrade() {
   document.querySelectorAll(".billing-opt").forEach(opt => {
     opt.classList.toggle("active", opt.dataset.billing === billingMode);
   });
+
   const proPrice = billingMode === "yearly" ? 23200 : 29000;
   const hhPrice = billingMode === "yearly" ? 47200 : 59000;
   const fmt = n => "Rp " + n.toLocaleString("id-ID");
-  document.getElementById("pro-price").textContent = fmt(proPrice);
-  document.getElementById("household-price").textContent = fmt(hhPrice);
+
+  const proPriceEl = document.getElementById("pro-price");
+  const hhPriceEl = document.getElementById("household-price");
+
+  if (proPriceEl) {
+    proPriceEl.textContent = fmt(proPrice);
+    proPriceEl.classList.remove("price-bump");
+    void proPriceEl.offsetWidth; // trigger reflow
+    proPriceEl.classList.add("price-bump");
+  }
+
+  if (hhPriceEl) {
+    hhPriceEl.textContent = fmt(hhPrice);
+    hhPriceEl.classList.remove("price-bump");
+    void hhPriceEl.offsetWidth;
+    hhPriceEl.classList.add("price-bump");
+  }
+
+  const proOrigEl = document.getElementById("pro-orig-price");
+  const proSavingsPill = document.getElementById("pro-savings-pill");
+  const proPeriodEl = document.getElementById("pro-period");
+  const hhOrigEl = document.getElementById("hh-orig-price");
+  const hhSavingsPill = document.getElementById("hh-savings-pill");
+  const hhPeriodEl = document.getElementById("household-period");
+
+  if (billingMode === "yearly") {
+    if (proOrigEl) proOrigEl.style.display = "block";
+    if (proSavingsPill) proSavingsPill.style.display = "inline-flex";
+    if (proPeriodEl) proPeriodEl.textContent = "/bln (ditagih tahunan)";
+    if (hhOrigEl) hhOrigEl.style.display = "block";
+    if (hhSavingsPill) hhSavingsPill.style.display = "inline-flex";
+    if (hhPeriodEl) hhPeriodEl.textContent = "/bln (ditagih tahunan)";
+  } else {
+    if (proOrigEl) proOrigEl.style.display = "none";
+    if (proSavingsPill) proSavingsPill.style.display = "none";
+    if (proPeriodEl) proPeriodEl.textContent = "/bulan";
+    if (hhOrigEl) hhOrigEl.style.display = "none";
+    if (hhSavingsPill) hhSavingsPill.style.display = "none";
+    if (hhPeriodEl) hhPeriodEl.textContent = "/bulan";
+  }
+
+  // Update calculator with new Pro monthly cost
+  const slider = document.getElementById("calc-expense-slider");
+  if (slider) {
+    updateSavingsCalculator(parseInt(slider.value, 10));
+  }
+
+  // Re-trigger entrance animation on plan cards
+  document.querySelectorAll(".plan-card").forEach((card, idx) => {
+    card.style.animation = "none";
+    void card.offsetWidth;
+    card.style.animation = `cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.05 + idx * 0.1}s both`;
+  });
+
+  if (!upgradeEventsBound) {
+    initUpgradeInteractions();
+    upgradeEventsBound = true;
+  }
 }
 
-document.getElementById("billing-toggle").addEventListener("click", e => {
-  const opt = e.target.closest("[data-billing]");
-  if (!opt) return;
-  billingMode = opt.dataset.billing;
-  renderUpgrade();
-});
+function initUpgradeInteractions() {
+  // Billing toggle click
+  const billingToggle = document.getElementById("billing-toggle");
+  if (billingToggle) {
+    billingToggle.addEventListener("click", e => {
+      const opt = e.target.closest("[data-billing]");
+      if (!opt) return;
+      billingMode = opt.dataset.billing;
+      renderUpgrade();
+    });
+  }
+
+  // Savings Calculator
+  const slider = document.getElementById("calc-expense-slider");
+  if (slider) {
+    slider.addEventListener("input", e => {
+      const val = parseInt(e.target.value, 10);
+      updateSavingsCalculator(val);
+      // update active preset if matches
+      document.querySelectorAll(".calc-preset-btn").forEach(btn => {
+        btn.classList.toggle("active", parseInt(btn.dataset.val, 10) === val);
+      });
+    });
+  }
+
+  document.querySelectorAll(".calc-preset-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const val = parseInt(btn.dataset.val, 10);
+      if (slider) {
+        slider.value = val;
+        updateSavingsCalculator(val);
+      }
+      document.querySelectorAll(".calc-preset-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  // Feature Comparison Table Toggle
+  const compHeader = document.getElementById("comparison-toggle-header");
+  const compTable = document.getElementById("comparison-table-wrap");
+  if (compHeader && compTable) {
+    compHeader.addEventListener("click", () => {
+      const isOpen = compTable.classList.contains("open");
+      compTable.classList.toggle("open", !isOpen);
+      compHeader.classList.toggle("open", !isOpen);
+    });
+  }
+
+  // FAQ Accordion
+  document.querySelectorAll(".faq-question").forEach(q => {
+    q.addEventListener("click", () => {
+      const item = q.closest(".faq-item");
+      if (!item) return;
+      const wasActive = item.classList.contains("active");
+      // Close others for clean accordion
+      document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+      if (!wasActive) item.classList.add("active");
+    });
+  });
+}
+
+function updateSavingsCalculator(expense) {
+  const fmt = n => "Rp " + Math.round(n).toLocaleString("id-ID");
+  const expenseValEl = document.getElementById("calc-expense-val");
+  const leakageEl = document.getElementById("calc-leakage-val");
+  const proCostEl = document.getElementById("calc-pro-cost");
+  const costNoteEl = document.getElementById("calc-cost-note");
+  const netSavingsEl = document.getElementById("calc-net-savings");
+  const multiplierEl = document.getElementById("calc-multiplier-badge");
+
+  const leakage = expense * 0.18;
+  const proCost = billingMode === "yearly" ? 23200 : 29000;
+  const netSavings = Math.max(0, leakage - proCost);
+  const multiplier = Math.max(1, Math.round(leakage / proCost));
+
+  if (expenseValEl) expenseValEl.textContent = fmt(expense);
+  if (leakageEl) leakageEl.textContent = fmt(leakage);
+  if (proCostEl) proCostEl.textContent = fmt(proCost);
+  if (costNoteEl) {
+    costNoteEl.textContent = billingMode === "yearly" ? "Per bulan (paket tahunan hemat 20%)" : "Per bulan (paket bulanan)";
+  }
+  if (netSavingsEl) netSavingsEl.textContent = "+ " + fmt(netSavings);
+  if (multiplierEl) multiplierEl.textContent = `🎉 Potensi ROI ${multiplier}x lipat dari biaya langganan!`;
+}
+
+/* ============================================================
+   CHECKOUT / UPGRADE MODAL & CELEBRATION
+============================================================ */
+function openCheckoutModal(plan = "pro") {
+  activeCheckoutPlan = plan;
+  appliedDiscountPct = 0;
+
+  const modal = document.getElementById("modal-upgrade-checkout");
+  if (!modal) return;
+
+  // Reset voucher UI
+  const voucherInput = document.getElementById("chk-voucher-code");
+  if (voucherInput) voucherInput.value = "";
+  const voucherMsg = document.getElementById("voucher-status-msg");
+  if (voucherMsg) voucherMsg.style.display = "none";
+  const discountRow = document.getElementById("chk-discount-row");
+  if (discountRow) discountRow.style.display = "none";
+
+  // Reset steps
+  const step1Body = document.getElementById("checkout-body-step1");
+  const step1Footer = document.getElementById("checkout-footer-step1");
+  const successBody = document.getElementById("checkout-body-success");
+  const successFooter = document.getElementById("checkout-footer-success");
+
+  if (step1Body) step1Body.classList.remove("hidden");
+  if (step1Footer) step1Footer.classList.remove("hidden");
+  if (successBody) successBody.classList.add("hidden");
+  if (successFooter) successFooter.classList.add("hidden");
+
+  // Update modal header & plan info
+  const eyebrow = document.getElementById("checkout-plan-eyebrow");
+  const title = document.getElementById("checkout-modal-title");
+  const badge = document.getElementById("checkout-plan-badge");
+  const summaryName = document.getElementById("chk-summary-name");
+  const summaryPeriod = document.getElementById("chk-summary-period");
+
+  const isPro = plan === "pro";
+  if (eyebrow) eyebrow.textContent = isPro ? "AKTIVASI PRO MAHASISWA" : "AKTIVASI HOUSEHOLD";
+  if (title) title.textContent = isPro ? "Upgrade ke StudentFin Pro" : "Mulai StudentFin Household";
+  if (badge) {
+    badge.innerHTML = `<i class="ti ti-sparkles"></i> Paket ${isPro ? "Pro" : "Household"} · ${billingMode === "yearly" ? "Tahunan (Hemat 20%)" : "Bulanan"}`;
+  }
+  if (summaryName) summaryName.textContent = isPro ? "StudentFin Pro" : "StudentFin Household";
+  if (summaryPeriod) summaryPeriod.textContent = billingMode === "yearly" ? "Tahunan" : "Bulanan";
+
+  updateCheckoutPrices();
+  modal.classList.add("show");
+}
+
+function closeCheckoutModal() {
+  const modal = document.getElementById("modal-upgrade-checkout");
+  if (modal) modal.classList.remove("show");
+}
+
+function updateCheckoutPrices() {
+  const isPro = activeCheckoutPlan === "pro";
+  const basePrice = isPro
+    ? (billingMode === "yearly" ? 278400 : 29000)
+    : (billingMode === "yearly" ? 566400 : 59000);
+
+  const fmt = n => "Rp " + Math.round(n).toLocaleString("id-ID");
+
+  const origEl = document.getElementById("chk-summary-orig");
+  const discountRow = document.getElementById("chk-discount-row");
+  const discountValEl = document.getElementById("chk-discount-val");
+  const totalEl = document.getElementById("chk-summary-total");
+
+  if (origEl) {
+    origEl.textContent = fmt(basePrice) + (billingMode === "yearly" ? " /tahun" : " /bulan");
+  }
+
+  let finalPrice = basePrice;
+  if (appliedDiscountPct > 0) {
+    const discountAmount = basePrice * (appliedDiscountPct / 100);
+    finalPrice = basePrice - discountAmount;
+    if (discountRow) discountRow.style.display = "flex";
+    if (discountValEl) discountValEl.textContent = "- " + fmt(discountAmount) + ` (${appliedDiscountPct}%)`;
+  } else {
+    if (discountRow) discountRow.style.display = "none";
+  }
+
+  if (totalEl) {
+    totalEl.textContent = fmt(finalPrice);
+  }
+}
+
+function applyCheckoutVoucher() {
+  const codeInput = document.getElementById("chk-voucher-code");
+  const msgEl = document.getElementById("voucher-status-msg");
+  if (!codeInput) return;
+
+  const code = codeInput.value.trim().toUpperCase();
+  if (!code) {
+    if (msgEl) {
+      msgEl.textContent = "Silakan masukkan kode voucher";
+      msgEl.style.color = "var(--danger)";
+      msgEl.style.display = "block";
+    }
+    return;
+  }
+
+  if (code === "MAHASISWA" || code === "HEMATPRO") {
+    appliedDiscountPct = 15;
+    if (msgEl) {
+      msgEl.innerHTML = `<i class="ti ti-circle-check"></i> Kupon "${code}" berhasil digunakan! Diskon ekstra 15% diterapkan.`;
+      msgEl.style.color = "var(--success)";
+      msgEl.style.display = "block";
+    }
+    updateCheckoutPrices();
+    showToast("Voucher berhasil diterapkan! Diskon 15%", "ti-sparkles");
+  } else {
+    appliedDiscountPct = 0;
+    if (msgEl) {
+      msgEl.textContent = `Kode "${code}" tidak ditemukan atau sudah kedaluwarsa. Coba kode: MAHASISWA`;
+      msgEl.style.color = "var(--danger)";
+      msgEl.style.display = "block";
+    }
+    updateCheckoutPrices();
+  }
+}
+
+function selectPaymentMethod(el) {
+  document.querySelectorAll(".payment-method-card").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
+  activePaymentMethod = el.dataset.pm || "qris";
+}
+
+function processCheckoutPayment() {
+  const btn = document.getElementById("btn-confirm-payment");
+  const label = document.getElementById("btn-pay-label");
+
+  if (btn) {
+    btn.disabled = true;
+    if (label) label.innerHTML = '<i class="ti ti-loader-2" style="animation: sparkleRotate 1s linear infinite;"></i> Menghubungkan gateway...';
+  }
+
+  setTimeout(() => {
+    if (btn) {
+      btn.disabled = false;
+      if (label) label.textContent = "Bayar & Aktivasi Sekarang";
+    }
+
+    // Switch to celebration step
+    const step1Body = document.getElementById("checkout-body-step1");
+    const step1Footer = document.getElementById("checkout-footer-step1");
+    const successBody = document.getElementById("checkout-body-success");
+    const successFooter = document.getElementById("checkout-footer-success");
+
+    if (step1Body) step1Body.classList.add("hidden");
+    if (step1Footer) step1Footer.classList.add("hidden");
+    if (successBody) successBody.classList.remove("hidden");
+    if (successFooter) successFooter.classList.remove("hidden");
+
+    // Mark user as Pro
+    isUserPro = true;
+    const userNameEl = document.querySelector(".sidebar-user .name");
+    if (userNameEl && !userNameEl.querySelector(".user-pro-badge")) {
+      const badge = document.createElement("span");
+      badge.className = "user-pro-badge";
+      badge.innerHTML = '<i class="ti ti-sparkles" style="font-size:10px;"></i> PRO';
+      userNameEl.appendChild(badge);
+    }
+
+    // Fire celebratory confetti!
+    triggerConfetti();
+  }, 900);
+}
+
+function finishCheckoutCelebration() {
+  closeCheckoutModal();
+  showToast("Selamat! Akun StudentFin kamu resmi menjadi PRO 🎉", "ti-sparkles");
+}
+
+function triggerConfetti() {
+  if (typeof confetti === "function") {
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 60,
+        origin: { x: 0.1, y: 0.7 }
+      });
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 60,
+        origin: { x: 0.9, y: 0.7 }
+      });
+    }, 250);
+  } else {
+    // Fallback: visual particle pulse
+    createFallbackParticles();
+  }
+}
+
+function createFallbackParticles() {
+  for (let i = 0; i < 30; i++) {
+    const dot = document.createElement("div");
+    dot.style.position = "fixed";
+    dot.style.left = 40 + Math.random() * 20 + "%";
+    dot.style.top = "50%";
+    dot.style.width = "10px";
+    dot.style.height = "10px";
+    dot.style.borderRadius = "50%";
+    dot.style.backgroundColor = ["#3525CD", "#FFB95F", "#10B981", "#EC4899", "#7C3AED"][Math.floor(Math.random() * 5)];
+    dot.style.zIndex = "9999";
+    dot.style.pointerEvents = "none";
+    dot.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+    document.body.appendChild(dot);
+    setTimeout(() => {
+      dot.style.transform = `translate(${(Math.random() - 0.5) * 500}px, ${(Math.random() - 0.8) * 400}px) scale(0)`;
+      dot.style.opacity = "0";
+    }, 20);
+    setTimeout(() => dot.remove(), 900);
+  }
+}
 
 /* ============================================================
    AUTO-SYNC — Accounts page
